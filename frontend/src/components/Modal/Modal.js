@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { hideModal} from '../../redux/actions';
+import { hideModal } from '../../redux/actions';
 import './Modal.css';
 
 class Modal extends Component {
@@ -18,9 +18,13 @@ class Modal extends Component {
   }
 
   componentWillReceiveProps(props) {
-    this.setState({
-      ...props[this.state.name],
-    });
+    const modal = props[this.state.name];
+    this.setState({ ...modal });
+    setTimeout(() => {
+      if (modal && !modal.isVisible) {
+        this.setState({ content: null });
+      }
+    }, 250);
   }
 
   hideModal = () => {
@@ -28,20 +32,22 @@ class Modal extends Component {
   }
 
   render() {
-    const { isVisible, type, content, color } = this.state;
+    const {
+      isVisible, type, content, color,
+    } = this.state;
 
     return (
       <div className="Modal" data-visible={isVisible} data-type={type}>
         <div className="Modal__bg" style={{ backgroundColor: color.bg }} onClick={this.hideModal} />
         <div className="Modal__content">
-          <div className="Modal__content__box">{content}</div>
+          <div className="Modal__content__box">{ content }</div>
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return state.modal;
 };
 
