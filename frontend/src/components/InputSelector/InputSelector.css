@@ -1,0 +1,35 @@
+.InputSelector {
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  z-index: 2;
+}
+.InputSelector__title {
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  padding: 10px 10px;
+  background-color: rgba(13, 99, 228, 1.0);
+}
+
+.InputSelector__option {
+  padding: 15px 25px;
+  cursor: pointer;
+}
+.InputSelector__option:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+.InputSelector__option:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.InputSelector__option:active {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.InputSelector__option__label {
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+}
