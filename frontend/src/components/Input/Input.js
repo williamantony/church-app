@@ -34,9 +34,17 @@ class Input extends Component {
   }
 
   componentWillReceiveProps(props) {
-    const { form, name } = this.state;
+    const { form, name, options } = this.state;
     const formData = props.formData[form] || {};
-    const value = formData[name] || '';
+    let value = formData[name] || '';
+
+    if (value !== '' && options.length > 0) {
+      const thisOption = options.find((option) => {
+        return option.value === value;
+      });
+      value = thisOption.label;
+    }
+
     this.setState({
       value,
       status: {

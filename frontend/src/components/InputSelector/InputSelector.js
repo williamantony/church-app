@@ -9,6 +9,7 @@ class InputSelectorOptionsList extends Component {
     this.state = {
       form: props.form,
       name: props.name,
+      value: props.value || '',
       label: props.label,
       options: props.options || [],
       searchInput: React.createRef(),
@@ -16,8 +17,24 @@ class InputSelectorOptionsList extends Component {
     };
   }
 
+  componentWillMount() {
+    const { form, name } = this.state;
+    const formData = this.props.formData[form] || {};
+    this.setState({
+      value: formData[name] || '',
+    });
+  }
+
   componentDidMount() {
     this.state.searchInput.current.focus();
+  }
+
+  componentWillReceiveProps(props) {
+    const {
+      form, name,
+    } = this.state;
+    const value = props.formData[form][name] || '';
+    this.setState({ value });
   }
 
   selectOption = (value) => {
@@ -51,11 +68,12 @@ class InputSelectorOptionsList extends Component {
               return new RegExp(`${this.state.searchInputValue}`, 'gi').test(option.label);
             })
             .map((option, index) => {
-            return (
-              <div key={index} className="InputSelector__option" onClick={() => this.selectOption(option.label)}>
-                <div className="InputSelector__option__label">{option.label || ''}</div>
-              </div>
-            );
+              return (
+                <div key={index} className="InputSelector__option" onClick={() => this.selectOption(option.value)}>
+                  <div className="InputSelector__option__selection-mark" data-visibility={(option.value === this.state.value)} />
+                  <div className="InputSelector__option__label">{option.label || ''}</div>
+                </div>
+              );
           })
         }
       </div>
