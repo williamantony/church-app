@@ -24,6 +24,7 @@
   font-family: 'Roboto', sans-serif;
   letter-spacing: 0.5px;
   opacity: 1.0;
+  z-index: 2;
   transition: color 0.25s ease-in-out 0s,
     font 0.25s ease-in-out 0s,
     opacity 0.25s ease-in-out 0s,
@@ -100,6 +101,7 @@ textarea.Input__input-field,
   outline: 0px;
   border: 0px;
   background-color: transparent;
+  z-index: 1;
 }
 input.Input__input-field[type="password"] {
   letter-spacing: 5px;

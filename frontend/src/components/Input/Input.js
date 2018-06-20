@@ -19,7 +19,7 @@ class Input extends Component {
       status: {
         isFocused: false,
         isFilled: false,
-        isDisabled: props.disabled || (props.type === 'select'),
+        isDisabled: props.disabled,
       },
     };
   }
@@ -75,14 +75,16 @@ class Input extends Component {
   }
 
   handleClick = (event) => {
-    if (!new RegExp(/^select|checkbox|radio$/gi).test(this.state.type)) {
+    if (!new RegExp(/^checkbox|radio$/gi).test(this.state.type)) {
       this.handleFocus(event);
       document.getElementById(this.state.fieldId).focus();
     }
   }
 
   showOptions = () => {
-    const { form, name, label, options } = this.state;
+    const {
+      form, name, label, options,
+    } = this.state;
     const selectorOptions = (
       <InputSelector
         form={form}
@@ -92,13 +94,6 @@ class Input extends Component {
       />
     );
     this.props.showModal('InputSelectorModal', selectorOptions);
-  }
-
-  showOptionsOnEnter = (event) => {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      this.showOptions();
-    }
   }
 
   render() {
@@ -125,7 +120,7 @@ class Input extends Component {
           <div className="Input__input-container">
             {
               (() => {
-                switch(type) {
+                switch (type) {
                   case 'textarea':
                     return (
                       <textarea
@@ -138,9 +133,9 @@ class Input extends Component {
                         onChange={this.handleInput}
                         onFocus={this.handleFocus}
                         onBlur={this.handleBlur}
-                      ></textarea>
+                      />
                     );
-                  
+
                   case 'select':
                     return (
                       <input
@@ -149,13 +144,14 @@ class Input extends Component {
                         id={fieldId}
                         name={name}
                         value={value}
-                        readOnly={true}
                         onChange={this.handleInput}
+                        onFocus={this.handleFocus}
+                        onBlur={this.handleBlur}
                         onClick={this.showOptions}
-                        onKeyDown={this.showOptionsOnEnter}
+                        onKeyDown={this.showOptions}
                       />
                     );
-                  
+
                   case 'checkbox':
                     return (
                       <CheckBox
@@ -165,7 +161,7 @@ class Input extends Component {
                         options={options}
                       />
                     );
-                  
+
                   case 'radio':
                     return (
                       <CheckBox
@@ -202,7 +198,7 @@ class Input extends Component {
 
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     formData: state.form,
   };

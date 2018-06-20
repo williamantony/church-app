@@ -1,9 +1,9 @@
-::selection {
+:not(input)::selection {
 	color: #000;
 	text-shadow: 0px 0px 0px 0px #ddd;
 	background: rgba(255, 255, 255, 0); 
 }
-::-moz-selection {
+:not(input)::-moz-selection {
 	color: #000;
 	text-shadow: 0px 0px 0px 0px #ddd;
 	background: rgba(255, 255, 255, 0); 
