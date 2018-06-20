@@ -24,9 +24,9 @@ class CheckBox extends Component {
 
   handleClick = (option) => {
     const { form, name } = this.state;
-    let value = option.value;
+    let { value } = option;
     if (this.state.type === 'checkbox') {
-      value = {...this.state.value};
+      value = { ...this.state.value };
       if (!value[option.name]) {
         value[option.name] = option.value;
       } else {
@@ -39,7 +39,11 @@ class CheckBox extends Component {
   render() {
     return (
       <div className="CheckBoxGroup">
-        <div className="CheckBoxGroup__label">{this.state.label}</div>
+        {
+          (this.state.label)
+            ? <div className="CheckBoxGroup__label">{this.state.label}</div>
+            : null
+        }
         {
           this.state.options.map((option, index) => {
             let isSelected = false;
@@ -48,7 +52,7 @@ class CheckBox extends Component {
             } else {
               isSelected = (option.value === this.state.value);
             }
-            
+
             return (
               <div
                 key={index}
@@ -68,7 +72,7 @@ class CheckBox extends Component {
 
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     formData: state.form,
   };
