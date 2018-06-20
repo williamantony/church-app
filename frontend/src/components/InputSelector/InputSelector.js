@@ -11,7 +11,13 @@ class InputSelectorOptionsList extends Component {
       name: props.name,
       label: props.label,
       options: props.options || [],
+      searchInput: React.createRef(),
+      searchInputValue: '',
     };
+  }
+
+  componentDidMount() {
+    this.state.searchInput.current.focus();
   }
 
   selectOption = (value) => {
@@ -20,12 +26,31 @@ class InputSelectorOptionsList extends Component {
     this.props.hideModal('InputSelectorModal');
   }
 
+  handleSearch = (event) => {
+    event.preventDefault();
+    this.setState({
+      searchInputValue: event.target.value,
+    });
+  }
+
   render() {
     return (
       <div className="InputSelector">
-        <div className="InputSelector__title">{this.state.label}</div>        
+        <div className="InputSelector__title">{this.state.label}</div>
+        <input
+          type="text"
+          ref={this.state.searchInput}
+          className="InputSelector__search"
+          placeholder="Search"
+          value={this.state.searchInputValue}
+          onChange={this.handleSearch}
+        />
         {
-          this.state.options.map((option, index) => {
+          this.state.options
+            .filter((option) => {
+              return new RegExp(`${this.state.searchInputValue}`, 'gi').test(option.label);
+            })
+            .map((option, index) => {
             return (
               <div key={index} className="InputSelector__option" onClick={() => this.selectOption(option.label)}>
                 <div className="InputSelector__option__label">{option.label || ''}</div>
@@ -39,7 +64,7 @@ class InputSelectorOptionsList extends Component {
 
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     formData: state.form,
   };
