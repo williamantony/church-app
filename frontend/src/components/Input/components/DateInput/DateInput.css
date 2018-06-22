@@ -1,0 +1,10 @@
+.DateInput {
+
+}
+.DateInput__dates {
+  display: flex;
+  flex-wrap: wrap;
+}
+.DateInput__dates-item {
+  flex-basis: 14.285714286%;
+}

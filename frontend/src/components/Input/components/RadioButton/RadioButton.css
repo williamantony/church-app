@@ -1,0 +1,45 @@
+.RadioButtonGroup {
+  padding: 10px 0px;
+}
+.RadioButtonGroup__label {
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  margin-bottom: 7px;
+  padding: 3px 7px;
+  cursor: default;
+}
+.RadioButton {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px 15px;
+}
+.RadioButton__input {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.35),
+    inset 0px 0px 0px 2px rgba(255, 255, 255, 1),
+    inset -3px -3px 12px 1px rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.075);
+  transform: scale(1.0);
+  cursor: pointer;
+  transition: box-shadow 0.25s ease-in-out 0s,
+    background 0.25s ease-in-out 0s,
+    transform 0.25s ease-in-out 0s;
+}
+.RadioButton[data-selected="true"] .RadioButton__input {
+  transform: scale(0.75);
+  box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.2),
+    inset 0px 0px 0px 0px rgba(255, 255, 255, 1),
+    inset -5px -5px 10px 2px rgba(0, 0, 0, 0.15);
+  background-color: rgba(59, 0, 255, 0.75);
+}
+.RadioButton__label {
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  margin-left: 10px;
+  cursor: pointer;
+}

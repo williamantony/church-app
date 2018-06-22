@@ -3,16 +3,6 @@
 }
 .Input__area {
   position: relative;
-}
-.Input[data-input-type="select"] .Input__area,
-.Input[data-input-type="select"] .Input__area  *,
-.Input[data-input-type="checkbox"] .Input__area,
-.Input[data-input-type="checkbox"] .Input__area  *,
-.Input[data-input-type="radio"] .Input__area,
-.Input[data-input-type="radio"] .Input__area  * {
-  cursor: pointer;
-}
-.Input:not([data-input-type="select"]) .Input__area {
   cursor: text;
 }
 
@@ -25,6 +15,7 @@
   letter-spacing: 0.5px;
   opacity: 1.0;
   z-index: 2;
+  cursor: text;
   transition: color 0.25s ease-in-out 0s,
     font 0.25s ease-in-out 0s,
     opacity 0.25s ease-in-out 0s,
@@ -45,6 +36,11 @@
   font-weight: 400;
   margin-top: 7px;
   margin-left: 7px;
+}
+
+.Input[data-input-type="radio"] .Input__label,
+.Input[data-input-type="checkbox"] .Input__label {
+  cursor: pointer;
 }
 
 .Input__layer-box {
@@ -86,8 +82,8 @@ input.Input__input-field[type="email"],
 input.Input__input-field[type="tel"],
 input.Input__input-field[type="search"],
 input.Input__input-field[type="password"],
-textarea.Input__input-field,
-.Input__input-select {
+input.Input__input-field[type="date"],
+textarea.Input__input-field {
   position: relative;
   top: 0px;
   width: 100%;
@@ -118,4 +114,16 @@ textarea.Input__input-field {
 }
 .Input[data-input-type="select"] input.Input__input-field[type="text"]:active {
   background-color: rgba(0, 0, 0, 0.02);
+}
+
+.Input[data-input-type="select"] .Input__area,
+.Input[data-input-type="select"] .Input__area * {
+  cursor: pointer;
+}
+
+
+
+.Input input:-webkit-autofill {
+  -webkit-box-shadow: inset 0px 0px 0px 30px rgba(255, 255, 255, 0) !important;
+  -webkit-background-color: rgba(255, 255, 255, 0) !important;
 }

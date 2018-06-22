@@ -2,206 +2,95 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setInput, showModal } from '../../redux/actions';
 import './Input.css';
-import InputSelector from '../InputSelector/InputSelector';
-import CheckBox from '../CheckBox/CheckBox';
+
+/* Input-Type Components */
+import CheckBox from './components/CheckBox/CheckBox';
+import RadioButton from './components/RadioButton/RadioButton';
+import Textbox from './components/Textbox/Textbox';
+import Textarea from './components/Textarea/Textarea';
+import Select from './components/Select/Select';
 
 class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: props.form || 'Form',
-      fieldId: `${props.form}_${props.type}_${props.name}`,
       type: props.type || 'text',
-      label: props.label || '',
+      form: props.form || 'Form',
       name: props.name || '',
       value: props.value || '',
+      label: props.label || '',
       options: props.options || [],
-      status: {
-        isFocused: false,
-        isFilled: false,
-        isDisabled: props.disabled,
-      },
+      isDisabled: props.disabled || false,
     };
   }
 
-  componentWillMount() {
-    this.setState({
-      status: {
-        ...this.state.status,
-        isFilled: this.state.value !== '',
-      },
-    });
-  }
-
-  componentWillReceiveProps(props) {
-    const { form, name, options } = this.state;
-    const formData = props.formData[form] || {};
-    let value = formData[name] || '';
-
-    if (value !== '' && options.length > 0) {
-      const thisOption = options.find((option) => {
-        return option.value === value;
-      });
-      value = thisOption.label;
-    }
-
-    this.setState({
-      value,
-      status: {
-        ...this.state.status,
-        isFilled: value !== '',
-      },
-    });
-  }
-
-  handleInput = (event) => {
-    event.preventDefault();
-    const { form, name } = this.state;
-    const { value } = event.target;
-    this.props.setInput(form, name, value);
-  }
-
-  handleFocus = () => {
-    if (!this.state.status.isDisabled) {
-      this.setState({
-        status: {
-          ...this.state.status,
-          isFocused: true,
-        },
-      });
-    }
-  }
-
-  handleBlur = () => {
-    this.setState({
-      status: {
-        ...this.state.status,
-        isFocused: false,
-        isFilled: this.state.value !== '',
-      },
-    });
-  }
-
-  handleClick = (event) => {
-    if (!new RegExp(/^checkbox|radio$/gi).test(this.state.type)) {
-      this.handleFocus(event);
-      document.getElementById(this.state.fieldId).focus();
-    }
-  }
-
-  showOptions = () => {
-    const {
-      form, name, label, options,
-    } = this.state;
-    const selectorOptions = (
-      <InputSelector
-        form={form}
-        name={name}
-        label={label}
-        options={options}
-      />
-    );
-    this.props.showModal('InputSelectorModal', selectorOptions);
-  }
-
   render() {
-    const { form, fieldId, type, label, name, value, options } = this.state;
-    const { isFilled, isFocused, isDisabled } = this.state.status;
-    return (
-      <div
-        className="Input"
-        data-focused={isFocused}
-        data-filled={isFilled}
-        data-disabled={isDisabled}
-        data-input-type={type}
-      >
-        <div className="Input__area" onClick={this.handleClick}>
-          {
-            (!new RegExp(/^checkbox|radio$/gi).test(type))
-              ? (
-                <div>
-                  <label className="Input__label" htmlFor={fieldId}>{label}</label>
-                  <div className="Input__layer Input__layer-box" />
-                </div>
-              ) : null
-          }
-          <div className="Input__input-container">
-            {
-              (() => {
-                switch (type) {
-                  case 'textarea':
-                    return (
-                      <textarea
-                        className="Input__input-field"
-                        type={type}
-                        id={fieldId}
-                        name={name}
-                        value={value}
-                        disabled={isDisabled}
-                        onChange={this.handleInput}
-                        onFocus={this.handleFocus}
-                        onBlur={this.handleBlur}
-                      />
-                    );
+    const {
+      form, type, label, name, value, options, isDisabled,
+    } = this.state;
 
-                  case 'select':
-                    return (
-                      <input
-                        className="Input__input-field"
-                        type="text"
-                        id={fieldId}
-                        name={name}
-                        value={value}
-                        onChange={this.handleInput}
-                        onFocus={this.handleFocus}
-                        onBlur={this.handleBlur}
-                        onClick={this.showOptions}
-                        onKeyDown={this.showOptions}
-                      />
-                    );
+    return (() => {
+      switch (type) {
+        case 'textarea':
+          return (
+            <Textarea
+              form={form}
+              name={name}
+              value={value}
+              label={label}
+              disabled={isDisabled}
+            />
+          );
 
-                  case 'checkbox':
-                    return (
-                      <CheckBox
-                        form={form}
-                        name={name}
-                        label={label}
-                        options={options}
-                      />
-                    );
+        case 'select':
+          return (
+            <Select
+              form={form}
+              name={name}
+              value={value}
+              label={label}
+              options={options}
+              disabled={isDisabled}
+            />
+          );
 
-                  case 'radio':
-                    return (
-                      <CheckBox
-                        type="radio"
-                        form={form}
-                        name={name}
-                        label={label}
-                        options={options}
-                      />
-                    );
+        case 'checkbox':
+          return (
+            <CheckBox
+              form={form}
+              name={name}
+              value={value}
+              label={label}
+              options={options}
+              disabled={isDisabled}
+            />
+          );
 
-                  default:
-                    return (
-                      <input
-                        className="Input__input-field"
-                        type={type}
-                        id={fieldId}
-                        name={name}
-                        value={value}
-                        disabled={isDisabled}
-                        onChange={this.handleInput}
-                        onFocus={this.handleFocus}
-                        onBlur={this.handleBlur}
-                      />
-                    );
-                }
-              })()
-            }
-          </div>
-        </div>
-      </div>
-    );
+        case 'radio':
+          return (
+            <RadioButton
+              form={form}
+              name={name}
+              value={value}
+              label={label}
+              options={options}
+              disabled={isDisabled}
+            />
+          );
+
+        default:
+          return (
+            <Textbox
+              type={type}
+              form={form}
+              name={name}
+              value={value}
+              label={label}
+              disabled={isDisabled}
+            />
+          );
+      }
+    })();
   }
 
 }
