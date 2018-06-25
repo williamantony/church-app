@@ -36,8 +36,6 @@ export const signout = () => {
 
 };
 
-
-
 /**
  * Form Input
  */
@@ -54,30 +52,41 @@ export const setInput = (form, name, value) => {
   };
 };
 
-
-
 /**
  * Modal
  */
+export const DESTROY_MODAL = 'DESTROY_MODAL';
 export const SHOW_MODAL = 'SHOW_MODAL';
 export const HIDE_MODAL = 'HIDE_MODAL';
 
-export const showModal = (name, content) => {
+export const showModal = (content, modalId) => {
+  const id = modalId || `modal_${new Date().getTime()}`;
   return {
+    id,
     type: SHOW_MODAL,
     payload: {
-      name,
-      isVisible: true,
+      id,
       content,
+      isVisible: true,
     },
   };
 };
 
-export const hideModal = (name = '*') => {
+export const hideModal = (modalId) => {
   return {
     type: HIDE_MODAL,
     payload: {
-      name,
+      id: modalId,
+      isVisible: false,
+    },
+  };
+};
+
+export const destroyModal = (modalId) => {
+  return {
+    type: DESTROY_MODAL,
+    payload: {
+      id: modalId,
       isVisible: false,
     },
   };
