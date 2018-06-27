@@ -34,15 +34,17 @@ class ModalInstance extends Component {
   componentWillReceiveProps(props) {
     const modal = props.modals[this.state.id];
     this.setState({
-      isVisible: modal.isVisible || false,
+      isVisible: modal.isVisible,
     });
+    if (!modal.isVisible) {
+      setTimeout(() => {
+        this.props.destroyModal(this.state.id);
+      }, 500);
+    }
   }
 
   hideModal = () => {
     this.props.hideModal(this.state.id);
-    setTimeout(() => {
-      this.props.destroyModal(this.state.id);
-    }, 500);
   }
 
   render() {

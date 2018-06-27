@@ -53,13 +53,13 @@
 }
 .Modal[data-visible="false"] .Modal__content {
   opacity: 0;
-  margin-top: -50%;
-  transition: opacity 0.25s ease-in-out 0s, margin 0.25s ease-in-out 0s;
+  transform: scale(0.75) translateY(-100px);
+  transition: opacity 0.25s ease-in-out 0s, transform 0.25s ease-in-out 0.25s;
 }
 .Modal[data-visible="true"] .Modal__content {
   opacity: 1.0;
-  margin-top: 0%;
-  transition: opacity 0.25s ease-in-out 0s, margin 0.25s ease-in-out 0s;
+  transform: scale(1) translateY(0px);
+  transition: opacity 0.25s ease-in-out 0s, transform 0.25s ease-in-out 0s;
 }
 
 .Modal__content__box {
