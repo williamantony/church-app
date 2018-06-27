@@ -26,22 +26,41 @@ export default (state = initialState, action) => {
         modals: {
           ...state.modals,
           [action.payload.id]: {
+            ...state.modals[action.payload.id],
             ...action.payload,
           },
         },
       };
+      // return {
+      //   modals: {
+      //     ...Object.keys(state.modals).reduce((modals, modalId) => {
+      //       const object = {
+      //         ...state.modals,
+      //       };
+      //       if (action.payload.id === modalId) {
+      //         object[modalId] = {
+      //           ...state.modals[modalId],
+      //           ...action.payload,
+      //         };
+      //       }
+      //       return object;
+      //     }, {}),
+      //   },
+      // };
 
     case DESTROY_MODAL:
       return {
         modals: {
           ...Object.keys(state.modals).reduce((modals, modalId) => {
-            console.log((modalId !== action.payload.id));
-            return (modalId !== action.payload.id) ? {
+            const object = {
               ...modals,
-              [modalId]: {
+            };
+            if (modalId !== action.payload.id) {
+              object[modalId] = {
                 ...state.modals[modalId],
-              }
-            } : modals;
+              };
+            }
+            return object;
           }, {}),
         },
       };
