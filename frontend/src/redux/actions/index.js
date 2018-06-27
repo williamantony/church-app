@@ -39,7 +39,17 @@ export const signout = () => {
 /**
  * Form Input
  */
+export const CREATE_FORM = 'CREATE_FORM';
 export const SET_INPUT = 'SET_INPUT';
+
+export const createForm = (form) => {
+  return {
+    type: CREATE_FORM,
+    payload: {
+      form,
+    },
+  };
+};
 
 export const setInput = (form, name, value) => {
   return {
@@ -87,7 +97,6 @@ export const destroyModal = (modalId) => {
     type: DESTROY_MODAL,
     payload: {
       id: modalId,
-      isVisible: false,
     },
   };
 };
