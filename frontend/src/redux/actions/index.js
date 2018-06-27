@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const API_URL = 'http://localhost:5000';
 
@@ -34,6 +34,21 @@ export const signin = () => {
 
 export const signout = () => {
 
+};
+
+/**
+ * Storage
+ */
+export const CREATE_STORAGE = 'CREATE_STORAGE';
+
+export const createStorage = (database = 'default', table = 'default') => {
+  return {
+    type: CREATE_STORAGE,
+    payload: {
+      database,
+      table,
+    },
+  };
 };
 
 /**
