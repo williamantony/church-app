@@ -40,6 +40,7 @@ export const signout = () => {
  * Storage
  */
 export const CREATE_STORAGE = 'CREATE_STORAGE';
+export const SET_STORAGE_DATA = 'SET_STORAGE_DATA';
 
 export const createStorage = (database = 'default', table = 'default') => {
   return {
@@ -47,6 +48,17 @@ export const createStorage = (database = 'default', table = 'default') => {
     payload: {
       database,
       table,
+    },
+  };
+};
+
+export const setStorageData = (database = 'default', table = 'default', data = {}) => {
+  return {
+    type: SET_STORAGE_DATA,
+    payload: {
+      database,
+      table,
+      data,
     },
   };
 };
