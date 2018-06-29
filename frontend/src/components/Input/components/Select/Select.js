@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { setInput, showModal } from '../../../../redux/actions';
 import InputSelector from './components/InputSelector/InputSelector';
 
+
 class Select extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +16,7 @@ class Select extends Component {
       label: props.label || '',
       value: props.value || '',
       options: props.options || [],
+      onSelect: props.onSelect,
       status: {
         isFocused: false,
         isFilled: false,
@@ -49,7 +51,7 @@ class Select extends Component {
 
   handleClick = () => {
     this.handleFocus();
-    this.state.inputField.current.focus();
+    this.state.inputField.current.blur();
   }
 
   handleFocus = () => {
@@ -80,8 +82,10 @@ class Select extends Component {
 
   showOptions = () => {
     const {
-      form, name, label, options,
+      form, name, label, options, onSelect,
     } = this.state;
+
+    const modalId = `modal_${new Date().getTime()}`;
 
     const selectorOptions = (
       <InputSelector
@@ -89,10 +93,13 @@ class Select extends Component {
         name={name}
         label={label}
         options={options}
+        onSelect={onSelect}
+        modalId={modalId}
       />
     );
 
-    this.props.showModal('InputSelectorModal', selectorOptions);
+    this.props.showModal(selectorOptions, label, modalId);
+
   }
 
   showOptionsOnKeyDown = (event) => {
@@ -103,7 +110,7 @@ class Select extends Component {
 
   render() {
     const {
-      fieldId, type, name, label, value, status, inputField,
+      fieldId, name, label, value, status, inputField,
     } = this.state;
 
     const { isFocused, isFilled, isDisabled } = status;
@@ -131,7 +138,7 @@ class Select extends Component {
               onChange={this.handleInput}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
-              onClick={this.showOptions}
+              onMouseDown={this.showOptions}
               onKeyDown={this.showOptionsOnKeyDown}
             />
           </div>

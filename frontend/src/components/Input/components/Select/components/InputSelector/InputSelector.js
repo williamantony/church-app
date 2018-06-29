@@ -12,6 +12,8 @@ class InputSelectorOptionsList extends Component {
       value: props.value || '',
       label: props.label,
       options: props.options || [],
+      onSelect: props.onSelect,
+      modalId: props.modalId,
       searchInput: React.createRef(),
       searchInputValue: '',
     };
@@ -26,25 +28,40 @@ class InputSelectorOptionsList extends Component {
   }
 
   componentDidMount() {
-    this.state.searchInput.current.focus();
+    setTimeout(() => {
+      this.state.searchInput.current.focus();
+    }, 250);
   }
 
   componentWillReceiveProps(props) {
     const {
       form, name,
     } = this.state;
-    const value = props.formData[form][name] || '';
+
+    const inputValue = props.formData[form][name];
+    const value = (inputValue !== undefined) ? inputValue : '';
+
     this.setState({ value });
   }
 
   selectOption = (value) => {
-    const { form, name } = this.state;
+    const {
+      form, name, onSelect, modalId,
+    } = this.state;
+
     this.props.setInput(form, name, value);
-    this.props.hideModal('InputSelectorModal');
+
+    setTimeout(() => {
+      this.props.hideModal(modalId);
+      if (typeof onSelect === 'function') {
+        onSelect();
+      }
+    }, 250);
   }
 
   handleSearch = (event) => {
     event.preventDefault();
+
     this.setState({
       searchInputValue: event.target.value,
     });
@@ -53,7 +70,6 @@ class InputSelectorOptionsList extends Component {
   render() {
     return (
       <div className="InputSelector">
-        <div className="InputSelector__title">{this.state.label}</div>
         <input
           type="text"
           ref={this.state.searchInput}
@@ -62,18 +78,27 @@ class InputSelectorOptionsList extends Component {
           value={this.state.searchInputValue}
           onChange={this.handleSearch}
         />
-        {
-          this.state.options
-            .filter(option => new RegExp(`${this.state.searchInputValue}`, 'gi').test(option.label))
-            .map((option, index) => {
-              return (
-                <div key={index} className="InputSelector__option" onClick={() => this.selectOption(option.value)}>
-                  <div className="InputSelector__option__selection-mark" data-visibility={(option.value === this.state.value)} />
-                  <div className="InputSelector__option__label">{option.label || ''}</div>
-                </div>
-              );
-          })
-        }
+        <div className="InputSelector__options">
+          {
+            this.state.options
+              .filter(option => new RegExp(`${this.state.searchInputValue}`, 'gi').test(option.label))
+              .map((option, index) => {
+                return (
+                  <div
+                    key={`${option.value}_${index + 1}`}
+                    className="InputSelector__option"
+                    onClick={() => this.selectOption(option.value)}
+                  >
+                    <div
+                      className="InputSelector__option__selection-mark"
+                      data-visibility={(option.value === this.state.value)}
+                    />
+                    <div className="InputSelector__option__label">{option.label || ''}</div>
+                  </div>
+                );
+            })
+          }
+        </div>
       </div>
     );
   }
