@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
         [action.payload.database]: {
           ...state[action.payload.database],
           [action.payload.table]: {
-            ...state[action.payload.database][action.payload.table],
+            ...(state[action.payload.database] || {})[action.payload.table],
           },
         },
       };

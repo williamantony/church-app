@@ -31,22 +31,6 @@ export default (state = initialState, action) => {
           },
         },
       };
-      // return {
-      //   modals: {
-      //     ...Object.keys(state.modals).reduce((modals, modalId) => {
-      //       const object = {
-      //         ...state.modals,
-      //       };
-      //       if (action.payload.id === modalId) {
-      //         object[modalId] = {
-      //           ...state.modals[modalId],
-      //           ...action.payload,
-      //         };
-      //       }
-      //       return object;
-      //     }, {}),
-      //   },
-      // };
 
     case DESTROY_MODAL:
       return {
