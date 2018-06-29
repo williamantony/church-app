@@ -1,0 +1,58 @@
+.DatePicker {
+  background-color: #fff;
+}
+.DatePicker__head {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 50px;
+  color: #000;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  margin-bottom: 1px;
+  padding: 0px 0px;
+}
+.DatePicker__selected-month {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0px 10px 0px 15px;
+}
+.DatePicker__selected-month::after {
+  /* content: ","; */
+}
+.DatePicker__selected-year {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0px 10px 0px 10px;
+}
+.DatePicker__dates {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1px;
+}
+
+.DatePicker__days-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 1px;
+}
+.DatePicker__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: calc((100% / 7) - 2px);
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  height: 20px;
+  border-radius: 3px;
+  margin: 1px;
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}

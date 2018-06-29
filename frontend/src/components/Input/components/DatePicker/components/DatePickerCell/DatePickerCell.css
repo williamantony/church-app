@@ -1,0 +1,51 @@
+.DatePickerCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: calc((100% / 7) - 2px);
+  height: 35px;
+  border-radius: 3px;
+  margin: 1px;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out 0s;
+}
+.DatePickerCell[data-current-month="true"] {
+  box-shadow: inset 0px -5px 15px -7px rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.DatePickerCell[data-current-month="true"]:hover {
+  background-color: blue;
+}
+.DatePickerCell[data-current-month="false"] {
+  background-color: rgba(0, 0, 0, 0.035);
+}
+.DatePickerCell[data-current-month="false"]:hover {
+  box-shadow: inset 0px -5px 15px -7px rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.075);
+}
+.DatePickerCell[data-today="true"] {
+  box-shadow: inset 0px 0px 0px 2px blue;
+}
+.DatePickerCell__date {
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  transition: all 0.15s ease-in-out 0s;
+}
+.DatePickerCell[data-current-month="true"] .DatePickerCell__date {
+  color: #000;
+}
+.DatePickerCell[data-current-month="true"]:hover .DatePickerCell__date {
+  color: #fff;
+  font-weight: 500;
+}
+.DatePickerCell[data-current-month="false"] .DatePickerCell__date {
+  color: rgba(0, 0, 0, 0.35);
+}
+.DatePickerCell[data-current-month="false"]:hover .DatePickerCell__date {
+  color: rgba(0, 0, 0, 1.0);
+  font-weight: 500;
+}
+.DatePickerCell[data-today="true"] .DatePickerCell__date {
+  font-weight: 500;
+}
