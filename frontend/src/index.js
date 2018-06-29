@@ -24,8 +24,7 @@ ReactDOM.render(
           <Route exact path="/login" component={SignIn} />
           <Route component={Error404} />
         </Switch>
-        <Modal name="InputSelectorModal" type="InputSelector" />
-        <Modal name="LoaderModal" type="Loader" />
+        <Modal />
       </div>
     </Router>
   </Provider>,
