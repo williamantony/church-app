@@ -8,6 +8,7 @@ class ModalInstance extends Component {
     super(props);
     this.state = {
       id: props.id,
+      title: null,
       content: null,
       isVisible: false,
       color: {
@@ -19,6 +20,7 @@ class ModalInstance extends Component {
   componentWillMount() {
     const modal = this.props.modals[this.state.id];
     this.setState({
+      title: modal.title || null,
       content: modal.content || null,
     });
   }
@@ -49,14 +51,19 @@ class ModalInstance extends Component {
 
   render() {
     const {
-      isVisible, content, color,
+      isVisible, content, title, color,
     } = this.state;
 
     return (
       <div className="Modal" data-visible={isVisible} data-type={'InputSelector'}>
         <div className="Modal__bg" style={{ backgroundColor: color.bg }} onClick={this.hideModal} />
         <div className="Modal__content">
-          <div className="Modal__content__box">{ content }</div>
+          <div className="Modal__content__box">
+            <div className="Modal__header">
+              <div className="Modal__header__title">{title}</div>
+            </div>
+            { content }
+          </div>
         </div>
       </div>
     );
