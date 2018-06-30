@@ -18,7 +18,6 @@ class RadioButton extends Component {
   componentWillReceiveProps(props) {
     const { form, name } = this.state;
     const value = props.formData[form][name] || {};
-    console.log(props.formData);
     this.setState({ value });
   }
 
