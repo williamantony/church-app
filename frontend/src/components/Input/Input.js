@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setInput, showModal } from '../../redux/actions';
+import { createForm, showModal } from '../../redux/actions';
 import './Input.css';
 
 /* Input-Type Components */
@@ -9,6 +9,7 @@ import RadioButton from './components/RadioButton/RadioButton';
 import Textbox from './components/Textbox/Textbox';
 import Textarea from './components/Textarea/Textarea';
 import Select from './components/Select/Select';
+import DateSelect from './components/DateSelect/DateSelect';
 
 class Input extends Component {
   constructor(props) {
@@ -21,12 +22,17 @@ class Input extends Component {
       label: props.label || '',
       options: props.options || [],
       isDisabled: props.disabled || false,
+      onSelect: props.onSelect,
     };
+  }
+
+  componentWillMount() {
+    this.props.createForm(this.state.form);
   }
 
   render() {
     const {
-      form, type, label, name, value, options, isDisabled,
+      form, type, label, name, value, options, isDisabled, onSelect,
     } = this.state;
 
     return (() => {
@@ -51,9 +57,23 @@ class Input extends Component {
               label={label}
               options={options}
               disabled={isDisabled}
+              onSelect={onSelect}
             />
           );
 
+        case 'date':
+          return (
+            <DateSelect
+              form={form}
+              name={name}
+              value={value}
+              label={label}
+              options={options}
+              disabled={isDisabled}
+              onSelect={onSelect}
+            />
+          );
+          
         case 'checkbox':
           return (
             <CheckBox
@@ -102,7 +122,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  setInput,
+  createForm,
   showModal,
 };
 
