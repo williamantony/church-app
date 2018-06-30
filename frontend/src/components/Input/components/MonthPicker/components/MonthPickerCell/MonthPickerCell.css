@@ -1,0 +1,32 @@
+.MonthPickerCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: calc((100% / 3) - 4px);
+  height: 35px;
+  border-radius: 3px;
+  margin: 2px;
+  box-shadow: inset 0px -5px 15px -7px rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out 0s;
+}
+.MonthPickerCell:hover {
+  background-color: blue;
+}
+.MonthPickerCell[data-selected="true"] {
+  background-color: blue;
+}
+
+.MonthPickerCell__name {
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  /* text-transform: uppercase; */
+  transition: all 0.15s ease-in-out 0s;
+}
+.MonthPickerCell[data-selected="true"] .MonthPickerCell__name,
+.MonthPickerCell[data-selected="false"]:hover .MonthPickerCell__name {
+  color: #fff;
+}
