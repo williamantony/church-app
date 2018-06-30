@@ -61,6 +61,12 @@ class ModalInstance extends Component {
           <div className="Modal__content__box">
             <div className="Modal__header">
               <div className="Modal__header__title">{title}</div>
+              <div className="Modal__close-button" onClick={this.hideModal}>
+                <div className="icon">
+                  <div className="line" />
+                  <div className="line" />
+                </div>
+              </div>
             </div>
             { content }
           </div>
