@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createForm, showModal, hideModal } from '../../../../redux/actions';
+import { createForm, createStorage, setStorageData, showModal, hideModal } from '../../../../redux/actions';
 import './DatePicker.css';
 import DatePickerCell from './components/DatePickerCell/DatePickerCell';
-import InputSelector from '../Select/components/InputSelector/InputSelector';
+import MonthPicker from '../MonthPicker/MonthPicker';
 
 class DatePicker extends Component {
   constructor(props) {
@@ -22,18 +22,20 @@ class DatePicker extends Component {
       month,
       monthName: monthsList[month],
       monthsList,
+      yearInput: year,
     };
   }
 
   componentWillMount() {
     this.props.createForm(this.state.form);
+    this.props.createStorage('_Input', '_Date');
   }
 
   componentWillReceiveProps(props) {
-    const formData = props.formData[this.state.form];
+    const InputDate = props.storage['_Input']['_Date'];
 
-    const month = (formData.month !== undefined) ? formData.month : this.state.month;
-    const year = (formData.year !== undefined) ? formData.year : this.state.year;
+    const month = (InputDate.month !== undefined) ? InputDate.month : this.state.month;
+    const year = (InputDate.year !== undefined) ? InputDate.year : this.state.year;
     const monthName = this.state.monthsList[month];
 
     this.setState({ year, month, monthName });
@@ -55,18 +57,7 @@ class DatePicker extends Component {
     const modalId = `modal_${new Date().getTime()}`;
 
     const selectorOptions = (
-      <InputSelector
-        form={this.state.form}
-        name="month"
-        label="Select Month"
-        options={
-          this.state.monthsList.map((month, index) => {
-            return {
-              label: `${(index < 9) ? 0 : ''}${index + 1} - ${month}`,
-              value: index,
-            };
-          })
-        }
+      <MonthPicker
         modalId={modalId}
       />
     );
@@ -74,35 +65,48 @@ class DatePicker extends Component {
     this.props.showModal(selectorOptions, 'Select Month', modalId);
   }
 
-  showYearOptions = () => {
-    const modalId = `modal_${new Date().getTime()}`;
+  handleYearInput = (event) => {
+    event.preventDefault();
 
-    const options = [];
+    const { value } = event.target;
+    const { length } = value.trim();
 
-    const thisYear = new Date().getFullYear();
+    if (length === 4) {
+      const storage = {
+        data: {
+          year: value,
+        },
+        database: '_Input',
+        table: '_Date',
+      };
 
-    for (let i = thisYear - 50; i < thisYear + 50; i++) {
-      options.push({
-        label: i,
-        value: i,
-      });
+      this.props.setStorageData(storage.data, storage.database, storage.table);
     }
 
-    const selectorOptions = (
-      <InputSelector
-        form={this.state.form}
-        name="year"
-        label="Select Year"
-        options={options}
-        modalId={modalId}
-      />
-    );
+    if (length < 5) {
+      this.setState({
+        yearInput: value,
+      });
+    }
+  }
 
-    this.props.showModal(selectorOptions, 'Select Year', modalId);
+  handleInvalidYearInput = (event) => {
+    event.preventDefault();
+
+    const { yearInput } = this.state;
+
+    if (yearInput.toString().trim().length < 4) {
+      const InputDate = this.props.storage['_Input']['_Date'];
+      const year = (InputDate.year !== undefined) ? InputDate.year : new Date().getFullYear();
+
+      this.setState({ yearInput: year });
+    }
   }
 
   render() {
-    const { year, month, monthName } = this.state;
+    const {
+      year, month, monthName, yearInput,
+    } = this.state;
     const daysList = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
     return (
@@ -110,7 +114,14 @@ class DatePicker extends Component {
         <div className="DatePicker__head">
           <div className="DatePicker__selected-month" onClick={this.showMonthOptions}>{monthName}</div>
           -
-          <div className="DatePicker__selected-year" onClick={this.showYearOptions}>{year}</div>
+          <div className="DatePicker__selected-year" onClick={this.showYearOptions}>
+            <input
+              type="number"
+              value={yearInput}
+              onChange={this.handleYearInput}
+              onBlur={this.handleInvalidYearInput}
+            />
+          </div>
         </div>
         <div className="DatePicker__days-label">
           {
@@ -122,7 +133,14 @@ class DatePicker extends Component {
         <div className="DatePicker__dates">
           {
             this.generateDays(year, month).map((date, index) => {
-              return <DatePickerCell key={`${date}_${index + 1}`} date={date} month={month} year={year} />;
+              return (
+                <DatePickerCell
+                  key={`${date}_${index + 1}`}
+                  date={date}
+                  month={month}
+                  year={year}
+                />
+              );
             })
           }
         </div>
@@ -135,11 +153,14 @@ class DatePicker extends Component {
 const mapStateToProps = (state) => {
   return {
     formData: state.form,
+    storage: state.storage,
   };
 };
 
 const mapDispatchToProps = {
   createForm,
+  createStorage,
+  setStorageData,
   showModal,
   hideModal,
 };
