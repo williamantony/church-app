@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import { setInput, showModal } from '../../../../redux/actions';
 import InputSelector from './components/InputSelector/InputSelector';
 
-
 class Select extends Component {
   constructor(props) {
     super(props);
     this.state = {
       inputField: React.createRef(),
       fieldId: `${props.form}_${props.type || 'text'}_${props.name}`,
-      type: props.type || 'text',
       form: props.form || 'Form',
       name: props.name,
       label: props.label || '',
@@ -99,7 +97,6 @@ class Select extends Component {
     );
 
     this.props.showModal(selectorOptions, label, modalId);
-
   }
 
   showOptionsOnKeyDown = (event) => {
