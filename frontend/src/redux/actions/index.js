@@ -50,7 +50,7 @@ export const createStorage = (database = 'default', table = 'default') => {
   };
 };
 
-export const setStorageData = (database = 'default', table = 'default', data = {}) => {
+export const setStorageData = (data = {}, database = 'default', table = 'default') => {
   return {
     type: SET_STORAGE_DATA,
     payload: {
