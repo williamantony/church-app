@@ -1,0 +1,15 @@
+.SplitField {
+  padding: 10px 0px;
+}
+.SplitField__label {
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  margin-bottom: 7px;
+  padding: 3px 7px;
+  cursor: default;
+}
+.SplitField__input-set {
+  display: flex;
+  justify-content: center;
+}
