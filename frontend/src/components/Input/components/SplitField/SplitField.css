@@ -1,5 +1,5 @@
 .SplitField {
-  padding: 10px 0px;
+  padding: 10px 0px 2.5px 0px;
 }
 .SplitField__label {
   font-size: 16px;
@@ -13,5 +13,5 @@
 .SplitField__input-set {
   display: flex;
   justify-content: center;
-  padding: 0px 15px;
+  padding: 0px 7px;
 }

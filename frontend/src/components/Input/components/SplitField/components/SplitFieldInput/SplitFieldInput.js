@@ -58,7 +58,7 @@ class SplitFieldInput extends Component {
     const { length, nextInputField } = this.state;
     if (value.length <= length.max) {
       this.setState({ value });
-    } 
+    }
     if (nextInputField && (value.length === length.max)) {
       this.state.nextInputField.current.focus();
     }
