@@ -10,6 +10,7 @@ import Textbox from './components/Textbox/Textbox';
 import Textarea from './components/Textarea/Textarea';
 import Select from './components/Select/Select';
 import DateSelect from './components/DateSelect/DateSelect';
+import SplitField from './components/SplitField/SplitField';
 
 class Input extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class Input extends Component {
       value: props.value || '',
       label: props.label || '',
       options: props.options || [],
+      fields: props.fields || [],
       isDisabled: props.disabled || false,
       onSelect: props.onSelect,
     };
@@ -32,7 +34,7 @@ class Input extends Component {
 
   render() {
     const {
-      form, type, label, name, value, options, isDisabled, onSelect,
+      form, type, label, name, value, options, fields, isDisabled, onSelect,
     } = this.state;
 
     return (() => {
@@ -73,7 +75,7 @@ class Input extends Component {
               onSelect={onSelect}
             />
           );
-          
+
         case 'checkbox':
           return (
             <CheckBox
@@ -94,6 +96,17 @@ class Input extends Component {
               value={value}
               label={label}
               options={options}
+              disabled={isDisabled}
+            />
+          );
+
+        case 'split':
+          return (
+            <SplitField
+              form={form}
+              name={name}
+              label={label}
+              fields={fields}
               disabled={isDisabled}
             />
           );

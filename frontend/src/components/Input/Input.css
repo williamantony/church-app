@@ -1,6 +1,16 @@
 .Input {
-  padding: 2.5px 5px;
+  padding: 5px 5px;
 }
+.Input[data-split-field="true"] {
+  padding: 5px 0px;
+}
+.Input[data-split-field="true"]:not(:first-child) {
+  padding-left: 2.5px;
+}
+.Input[data-split-field="true"]:not(:last-child) {
+  padding-right: 2.5px;
+}
+
 .Input__area {
   position: relative;
   cursor: text;
@@ -68,6 +78,9 @@
     0px 5px 2px -3px rgba(0, 0, 0, 0.1);
   background-color: transparent;
 }
+.Input[data-split-field="true"] .Input__layer-box {
+  background-color: rgba(255, 255, 255, 1);
+}
 
 .Input__input-container {
   padding: 0px 0px 0px 0px;
@@ -122,6 +135,11 @@ textarea.Input__input-field {
   padding: 25px 7px 7px 7px;
 }
 
+.Input[data-split-field="true"] input.Input__input-field {
+  width: calc(100% - 14px);
+  padding: 16px 7px 16px 7px;
+  text-align: center;
+}
 
 .Input[data-input-type="select"] input.Input__input-field[type="text"]:hover {
   background-color: rgba(0, 0, 0, 0.01);
@@ -134,8 +152,6 @@ textarea.Input__input-field {
 .Input[data-input-type="select"] .Input__area * {
   cursor: pointer;
 }
-
-
 
 .Input input:-webkit-autofill {
   -webkit-box-shadow: inset 0px 0px 0px 30px rgba(255, 255, 255, 0) !important;
