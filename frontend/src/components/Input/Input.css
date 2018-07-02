@@ -87,10 +87,10 @@ textarea.Input__input-field {
   position: relative;
   top: 0px;
   width: 100%;
-  width: calc(100% - 14px);
+  width: calc(100% - 20px);
   min-height: 21px;
   color: #000;
-  padding: 25px 7px 7px 7px;
+  padding: 16px 10px;
   font-size: 18px;
   font-family: 'Roboto', sans-serif;
   letter-spacing: 0.5px;
@@ -109,6 +109,20 @@ textarea.Input__input-field {
   padding: 0px 7px 7px 7px;
   resize: vertical;
 }
+
+.Input[data-hasLabel="true"] input.Input__input-field[type="text"],
+.Input[data-hasLabel="true"] input.Input__input-field[type="number"],
+.Input[data-hasLabel="true"] input.Input__input-field[type="email"],
+.Input[data-hasLabel="true"] input.Input__input-field[type="tel"],
+.Input[data-hasLabel="true"] input.Input__input-field[type="search"],
+.Input[data-hasLabel="true"] input.Input__input-field[type="password"],
+.Input[data-hasLabel="true"] input.Input__input-field[type="date"],
+.Input[data-hasLabel="true"] textarea.Input__input-field {
+  width: calc(100% - 14px);
+  padding: 25px 7px 7px 7px;
+}
+
+
 .Input[data-input-type="select"] input.Input__input-field[type="text"]:hover {
   background-color: rgba(0, 0, 0, 0.01);
 }
