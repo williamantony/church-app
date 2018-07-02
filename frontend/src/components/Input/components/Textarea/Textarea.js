@@ -72,7 +72,7 @@ class Textarea extends Component {
         data-filled={isFilled}
         data-disabled={isDisabled}
         data-input-type="textarea"
-        data-hasLabel={label !== undefined}
+        data-has-label={label !== undefined}
       >
         <div className="Input__area" onClick={this.handleClick}>
           {

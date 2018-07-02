@@ -110,14 +110,14 @@ textarea.Input__input-field {
   resize: vertical;
 }
 
-.Input[data-hasLabel="true"] input.Input__input-field[type="text"],
-.Input[data-hasLabel="true"] input.Input__input-field[type="number"],
-.Input[data-hasLabel="true"] input.Input__input-field[type="email"],
-.Input[data-hasLabel="true"] input.Input__input-field[type="tel"],
-.Input[data-hasLabel="true"] input.Input__input-field[type="search"],
-.Input[data-hasLabel="true"] input.Input__input-field[type="password"],
-.Input[data-hasLabel="true"] input.Input__input-field[type="date"],
-.Input[data-hasLabel="true"] textarea.Input__input-field {
+.Input[data-has-label="true"] input.Input__input-field[type="text"],
+.Input[data-has-label="true"] input.Input__input-field[type="number"],
+.Input[data-has-label="true"] input.Input__input-field[type="email"],
+.Input[data-has-label="true"] input.Input__input-field[type="tel"],
+.Input[data-has-label="true"] input.Input__input-field[type="search"],
+.Input[data-has-label="true"] input.Input__input-field[type="password"],
+.Input[data-has-label="true"] input.Input__input-field[type="date"],
+.Input[data-has-label="true"] textarea.Input__input-field {
   width: calc(100% - 14px);
   padding: 25px 7px 7px 7px;
 }
