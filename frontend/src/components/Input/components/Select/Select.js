@@ -119,9 +119,14 @@ class Select extends Component {
         data-filled={isFilled}
         data-disabled={isDisabled}
         data-input-type="select"
+        data-hasLabel={label !== undefined}
       >
         <div className="Input__area" onClick={this.handleClick}>
-          <label className="Input__label" htmlFor={fieldId}>{label}</label>
+          {
+            (label)
+              ? <label className="Input__label" htmlFor={fieldId}>{label}</label>
+              : null
+          }
           <div className="Input__layer Input__layer-box" />
           <div className="Input__input-container">
             <input
