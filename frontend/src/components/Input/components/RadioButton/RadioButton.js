@@ -28,29 +28,34 @@ class RadioButton extends Component {
 
   render() {
     return (
-      <div className="RadioButtonGroup">
-        {
-          (this.state.label)
-            ? <div className="RadioButtonGroup__label">{this.state.label}</div>
-            : null
-        }
-        {
-          this.state.options.map((option, index) => {
-            const isSelected = (option.value === this.state.value);
+      <div className="Input" data-focused="false">
+        <div className="Input__area">
+          <div className="Input__layer-box" />
+          <div className="RadioButtonGroup">
+            {
+              (this.state.label)
+                ? <div className="RadioButtonGroup__label">{this.state.label}</div>
+                : null
+            }
+            {
+              this.state.options.map((option, index) => {
+                const isSelected = (option.value === this.state.value);
 
-            return (
-              <div
-                key={index}
-                className="RadioButton"
-                data-selected={isSelected}
-                onClick={() => this.handleClick(option.value)}
-              >
-                <div className="RadioButton__input" />
-                <div className="RadioButton__label">{option.label}</div>
-              </div>
-            );
-          })
-        }
+                return (
+                  <div
+                    key={index}
+                    className="RadioButton"
+                    data-selected={isSelected}
+                    onClick={() => this.handleClick(option.value)}
+                  >
+                    <div className="RadioButton__input" />
+                    <div className="RadioButton__label">{option.label}</div>
+                  </div>
+                );
+              })
+            }
+          </div>
+        </div>
       </div>
     );
   }
