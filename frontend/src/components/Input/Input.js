@@ -21,6 +21,7 @@ class Input extends Component {
       name: props.name || '',
       value: props.value || '',
       label: props.label || '',
+      autoComplete: props.autoComplete,
       options: props.options || [],
       fields: props.fields || [],
       isDisabled: props.disabled || false,
@@ -34,7 +35,7 @@ class Input extends Component {
 
   render() {
     const {
-      form, type, label, name, value, options, fields, isDisabled, onSelect,
+      form, type, label, name, value, options, fields, isDisabled, onSelect, autoComplete,
     } = this.state;
 
     return (() => {
@@ -119,6 +120,7 @@ class Input extends Component {
               name={name}
               value={value}
               label={label}
+              autoComplete={autoComplete}
               disabled={isDisabled}
             />
           );

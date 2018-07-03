@@ -12,6 +12,7 @@ class Textbox extends Component {
       form: props.form || 'Form',
       name: props.name,
       label: props.label || '',
+      autoComplete: props.autoComplete || 'off',
       value: props.value || '',
       status: {
         isFocused: false,
@@ -62,7 +63,7 @@ class Textbox extends Component {
 
   render() {
     const {
-      fieldId, type, name, label, value, status, inputField,
+      fieldId, type, name, label, value, status, inputField, autoComplete,
     } = this.state;
 
     const { isFocused, isFilled, isDisabled } = status;
@@ -91,6 +92,7 @@ class Textbox extends Component {
               ref={inputField}
               name={name}
               value={value}
+              autoComplete={autoComplete}
               disabled={isDisabled}
               onChange={this.handleInput}
               onFocus={this.handleFocus}
