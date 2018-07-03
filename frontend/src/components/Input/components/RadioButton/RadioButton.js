@@ -7,6 +7,7 @@ class RadioButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      fieldId: `${props.form}_radiobutton_${props.name}`,
       form: props.form,
       name: props.name,
       label: props.label || '',
@@ -42,14 +43,9 @@ class RadioButton extends Component {
                 const isSelected = (option.value === this.state.value);
 
                 return (
-                  <div
-                    key={index}
-                    className="RadioButton"
-                    data-selected={isSelected}
-                    onClick={() => this.handleClick(option.value)}
-                  >
-                    <div className="RadioButton__input" />
-                    <div className="RadioButton__label">{option.label}</div>
+                  <div key={`${this.state.fieldId}_${index + 1}`} className="RadioButton" data-selected={isSelected}>
+                    <div className="RadioButton__input" onClick={() => this.handleClick(option.value)} />
+                    <div className="RadioButton__label" onClick={() => this.handleClick(option.value)}>{option.label}</div>
                   </div>
                 );
               })

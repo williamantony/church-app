@@ -7,7 +7,7 @@ class CheckBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fieldId: `${props.form}_${props.type || 'text'}_${props.name}`,
+      fieldId: `${props.form}_checkbox_${props.name}`,
       form: props.form,
       name: props.name,
       label: props.label,
@@ -31,7 +31,6 @@ class CheckBox extends Component {
     } else {
       delete value[option.name];
     }
-    console.log(this.state.value);
 
     this.props.setInput(form, name, value);
   }
