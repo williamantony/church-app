@@ -30,7 +30,7 @@ class Button extends Component {
     });
     setTimeout(() => {
       this.setState({ clicked: false });
-    }, 250);
+    }, 500);
   }
 
   render() {
@@ -41,6 +41,7 @@ class Button extends Component {
         onMouseDown={this.handleMouseDown}
       >
         <div className="Button__circle" style={this.state.circle}>
+          <div className="circle" />
           <div className="circle" />
         </div>
         <div className="Button__content">
