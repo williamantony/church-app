@@ -1,31 +1,52 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { setStorageData, setInput } from '../../../../../../redux/actions';
 import './SplitFieldInput.css';
 
 class SplitFieldInput extends Component {
   constructor(props) {
     super(props);
+    const {
+      form, name, field, fields, index,
+    } = props;
 
-    const length = props.length || {};
+    const fieldId = `${form}_split-input_${name}`;
+    const inputId = `${fieldId}_${index + 1}`;
+    const inputName = field.name || (index + 1);
+
+    const length = field.length || {};
     length.min = length.min || 0;
     length.max = length.max || 524288;
-    
+
+    const isLastInput = index === (fields.length - 1);
+
     this.state = {
-      inputField: props.reference,
-      nextInputField: (props.nextInputField || {}).ref,
-      id: props.id,
-      form: props.form,
-      name: props.name,
-      type: props.type || 'text',
-      label: props.label,
+      fieldId,
+      form,
+      name,
+      inputId,
+      inputName,
+      type: field.type || 'text',
+      label: field.label,
       length,
       value: '',
+      inputField: field.ref,
+      nextInputField: (fields[index + 1] || {}).ref,
       status: {
         isFocused: false,
         isFilled: false,
-        isDisabled: props.disabled,
+        isDisabled: field.disabled || false,
+        isLastInput,
       },
     };
+  }
+
+  componentWillReceiveProps(props) {
+    const { fieldId, inputName, value } = this.state;
+    const storageData = props.storage['_Input'][fieldId];
+    this.setState({
+      value: storageData[inputName] || value,
+    });
   }
 
   handleClick = () => {
@@ -54,19 +75,36 @@ class SplitFieldInput extends Component {
 
   handleInput = (event) => {
     event.preventDefault();
+
+    const {
+      length, nextInputField, fieldId, inputName, status,
+      form, name,
+    } = this.state;
     const { value } = event.target;
-    const { length, nextInputField } = this.state;
-    if (value.length <= length.max) {
+
+    if (value.length === length.max) {
+      const newValue = {
+        ...this.props.storage['_Input'][fieldId],
+        [inputName]: value,
+      };
+
+      this.props.setStorageData(newValue, '_Input', fieldId);
+
+      if (status.isLastInput) {
+        this.props.setInput(form, name, Object.values(newValue).join(''));
+      }
+
+      if (nextInputField) {
+        nextInputField.current.focus();
+      }
+    } else if (value.length < length.max) {
       this.setState({ value });
-    }
-    if (nextInputField && (value.length === length.max)) {
-      this.state.nextInputField.current.focus();
     }
   }
 
   render() {
     const {
-      fieldId, type, name, label, value, status, inputField,
+      inputId, type, inputName, label, value, status, inputField,
     } = this.state;
 
     const { isFocused, isFilled, isDisabled } = status;
@@ -84,7 +122,7 @@ class SplitFieldInput extends Component {
         <div className="Input__area" onClick={this.handleClick}>
           {
             (label)
-              ? <label className="Input__label" htmlFor={fieldId}>{label}</label>
+              ? <label className="Input__label" htmlFor={inputId}>{label}</label>
               : null
           }
           <div className="Input__layer Input__layer-box" />
@@ -92,9 +130,9 @@ class SplitFieldInput extends Component {
             <input
               className="Input__input-field"
               type={type}
-              id={fieldId}
+              id={inputId}
               ref={inputField}
-              name={name}
+              name={inputName}
               value={value}
               disabled={isDisabled}
               onChange={this.handleInput}
@@ -110,11 +148,14 @@ class SplitFieldInput extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return state;
+  return {
+    storage: state.storage,
+  };
 };
 
 const mapDispatchToProps = {
-
+  setStorageData,
+  setInput,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplitFieldInput);

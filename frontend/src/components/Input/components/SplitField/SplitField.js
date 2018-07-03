@@ -1,56 +1,59 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { createStorage } from '../../../../redux/actions';
 import './SplitField.css';
 import SplitFieldInput from './components/SplitFieldInput/SplitFieldInput';
 
 class SplitField extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      fieldId: `${props.form}_split-input_${props.name}`,
-      form: props.form || 'Form',
-      name: props.name,
-      label: props.label,
-      fields: props.fields || [],
-    };
-  }
 
-  componentWillMount() {
-    const fields = this.state.fields.map((field) => {
+    const fields = (props.fields || []).map((field) => {
       return {
         ...field,
         ref: React.createRef(),
       };
     });
 
-    this.setState({ fields });
+    this.state = {
+      fieldId: `${props.form}_split-input_${props.name}`,
+      form: props.form || 'Form',
+      name: props.name,
+      label: props.label,
+      fields,
+    };
+  }
+
+  componentWillMount() {
+    this.props.createStorage('_Input', this.state.fieldId);
   }
 
   render() {
+    const {
+      form, name, label, fields,
+    } = this.state;
+
     return (
       <div className="Input" data-focused="false">
         <div className="Input__area">
           <div className="Input__layer-box" />
           <div className="SplitField">
             {
-              (this.state.label)
-                ? <div className="SplitField__label">{this.state.label}</div>
+              (label)
+                ? <div className="SplitField__label">{label}</div>
                 : null
             }
             <div className="SplitField__input-set">
               {
-                this.state.fields.map((field, index, fields) => {
+                fields.map((field, index, fieldsArray) => {
                   return (
                     <SplitFieldInput
                       key={new Date().getTime() + index + 1}
-                      reference={field.ref}
-                      nextInputField={fields[index + 1]}
-                      id={`${this.state.fieldId}_${index + 1}`}
-                      form={this.state.form}
-                      name={this.state.name}
-                      type={field.type}
-                      label={field.label}
-                      length={field.length}
+                      form={form}
+                      name={name}
+                      index={index}
+                      field={field}
+                      fields={fieldsArray}
                     />
                   );
                 })
@@ -64,12 +67,12 @@ class SplitField extends Component {
 
 }
 
-const mapStateToProps = (state) => {
-  return state;
+const mapStateToProps = () => {
+  return {};
 };
 
 const mapDispatchToProps = {
-
+  createStorage,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplitField);
