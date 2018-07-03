@@ -24,13 +24,14 @@ class CheckBox extends Component {
 
   handleClick = (option) => {
     const { form, name } = this.state;
-    const value = { ...this.state.value };
+    const value = { ...(typeof this.state.value === 'string' ? {} : this.state.value) };
 
     if (!value[option.name]) {
       value[option.name] = option.value;
     } else {
       delete value[option.name];
     }
+    console.log(this.state.value);
 
     this.props.setInput(form, name, value);
   }
