@@ -15,3 +15,10 @@ body {
   font-family: sans-serif;
   overflow-x: hidden;
 }
+
+.InputGroup {
+	padding: 5px 0px;
+}
+.InputGroup:not(:first-child) {
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
