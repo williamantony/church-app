@@ -32,6 +32,7 @@ class DateSelect extends Component {
   }
 
   componentWillReceiveProps(props) {
+    const { form, name } = this.state;
 
     const storageData = props.storage['_Input']['_Date'] || {};
 
@@ -43,6 +44,7 @@ class DateSelect extends Component {
     const dateString = new Date(year, month, date).toDateString();
     const value = (Object.keys(storageData).length > 0) ? dateString : '';
 
+    this.props.setInput(form, name, value);
 
     this.setState({
       value,
@@ -148,7 +150,6 @@ class DateSelect extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    formData: state.form,
     storage: state.storage,
   };
 };
