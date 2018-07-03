@@ -23,6 +23,7 @@ class DatePicker extends Component {
       monthName: monthsList[month],
       monthsList,
       yearInput: year,
+      modalId: props.modalId,
     };
   }
 
@@ -105,7 +106,7 @@ class DatePicker extends Component {
 
   render() {
     const {
-      year, month, monthName, yearInput,
+      year, month, monthName, yearInput, modalId,
     } = this.state;
     const daysList = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
@@ -139,6 +140,7 @@ class DatePicker extends Component {
                   date={date}
                   month={month}
                   year={year}
+                  modalId={modalId}
                 />
               );
             })

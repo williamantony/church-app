@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { showModal } from '../../../../../../redux/actions';
+import { setStorageData, showModal, hideModal } from '../../../../../../redux/actions';
 import './DatePickerCell.css';
 
 class DatePickerCell extends Component {
@@ -11,6 +11,7 @@ class DatePickerCell extends Component {
       date: new Date(props.date),
       year: props.year,
       month: props.month,
+      modalId: props.modalId,
       isCurrentMonth: false,
       isSelected: false,
       isToday: false,
@@ -37,7 +38,18 @@ class DatePickerCell extends Component {
   }
 
   handleClick = () => {
+    const { date, modalId } = this.state;
 
+    const data = {
+      date: date.getDate(),
+      month: date.getMonth(),
+      year: date.getFullYear(),
+    };
+    this.props.setStorageData(data, '_Input', '_Date');
+
+    setTimeout(() => {
+      this.props.hideModal(modalId);
+    }, 250);
   }
 
   render() {
@@ -65,7 +77,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
+  setStorageData,
   showModal,
+  hideModal,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DatePickerCell);

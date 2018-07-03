@@ -32,13 +32,20 @@ class DateSelect extends Component {
   }
 
   componentWillReceiveProps(props) {
-    const { form, name, options } = this.state;
-    const value = props.formData[form][name] || '';
 
-    const currentOption = options.find(option => option.value === value) || {};
+    const storageData = props.storage['_Input']['_Date'] || {};
+
+    const now = new Date();
+    const date = storageData.date || now.getDate();
+    const month = storageData.month || now.getMonth();
+    const year = storageData.year || now.getFullYear();
+
+    const dateString = new Date(year, month, date).toDateString();
+    const value = (Object.keys(storageData).length > 0) ? dateString : '';
+
 
     this.setState({
-      value: currentOption.label || '',
+      value,
       status: {
         ...this.state.status,
         isFilled: value !== '',
@@ -78,11 +85,13 @@ class DateSelect extends Component {
   }
 
   showOptions = () => {
+    const modalId = `modal_${new Date().getTime()}`;
+
     const selectorOptions = (
-      <DatePicker />
+      <DatePicker modalId={modalId} />
     );
 
-    this.props.showModal(selectorOptions, 'Pick a date');
+    this.props.showModal(selectorOptions, 'Pick a date', modalId);
   }
 
   showOptionsOnKeyDown = (event) => {
@@ -140,6 +149,7 @@ class DateSelect extends Component {
 const mapStateToProps = (state) => {
   return {
     formData: state.form,
+    storage: state.storage,
   };
 };
 
