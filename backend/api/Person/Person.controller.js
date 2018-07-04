@@ -15,10 +15,14 @@ const addPerson = async (req, res) => {
   }
 };
 
-const getPerson = (req, res) => {
-
-
-
+const getPerson = async (req, res) => {
+  const { personId } = req.params;
+  try {
+    const getRequest = await Person.findById(personId);
+    res.status(SUCCESS).json(getRequest);
+  } catch(error) {
+    console.log(error);
+  }
 };
 
 const updatePerson = async (req, res) => {
