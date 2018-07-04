@@ -17,6 +17,20 @@ const validateEmailAddress = async (req, res, next) => {
   next();
 };
 
+const validateUsername = (req, res, next) => {
+  const { username } = req.body;
+
+  if (username.length < 6) {
+    res.status(USER_ERROR).json({
+      error: 'Username should have alteast 6 characters',
+    });
+    return;
+  }
+
+  next();
+};
+
 module.exports = {
   validateEmailAddress,
+  validateUsername,
 };
