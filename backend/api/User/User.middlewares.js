@@ -65,9 +65,30 @@ const hashPassword = async (req, res, next) => {
   }
 };
 
+const findUserByLoginId = async (req, res, next) => {
+  const { loginId } = req.body;
+  const matchedUser = await User.findOne({
+    $or: [
+      { username: loginId },
+      { email: loginId },
+    ],
+  });
+
+  if (!matchedUser) {
+    res.status(UNAUTHORIZED).json({
+      error: 'Invalid login credentials',
+    });
+    return;
+  }
+  
+  req.user = matchedUser;
+  next();
+};
+
 module.exports = {
   validateEmailAddress,
   validateUsername,
   validatePasswordStrength,
   hashPassword,
+  findUserByLoginId,
 };
