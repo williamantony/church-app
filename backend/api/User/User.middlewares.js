@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 const User = require('./User.model');
 const {
   SERVER_ERROR,
@@ -50,8 +52,22 @@ const validatePasswordStrength = (req, res, next) => {
   next();
 };
 
+const hashPassword = async (req, res, next) => {
+  const { password } = req.body;
+  try {
+    req.body.passwordHash = await bcrypt.hash(password, 10);
+    next();
+  }
+  catch(error) {
+    res.status(SERVER_ERROR).json({
+      error: 'Error hashing password, please try another one',
+    });
+  }
+};
+
 module.exports = {
   validateEmailAddress,
   validateUsername,
   validatePasswordStrength,
+  hashPassword,
 };
