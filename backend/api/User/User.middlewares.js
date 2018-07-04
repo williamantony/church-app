@@ -85,10 +85,26 @@ const findUserByLoginId = async (req, res, next) => {
   next();
 };
 
+const verifyPassword = async (req, res, next) => {
+  const { user } = req;
+  const { password } = req.body;
+  const passwordMatched = await bcrypt.compare(password, user.password);
+
+  if (!passwordMatched) {
+    res.status(UNAUTHORIZED).json({
+      error: 'Invalid login credentials',
+    });
+    return;
+  }
+  
+  next();
+};
+
 module.exports = {
   validateEmailAddress,
   validateUsername,
   validatePasswordStrength,
   hashPassword,
   findUserByLoginId,
+  verifyPassword,
 };
