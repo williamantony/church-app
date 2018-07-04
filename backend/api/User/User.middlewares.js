@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt');
-
 const User = require('./User.model');
+
 const {
+  UNAUTHORIZED,
+  USER_ERROR,
   SERVER_ERROR,
 } = require('../status.codes');
 
