@@ -9,8 +9,16 @@ const addPerson = async (req, res) => {
   try {
     const createRequest = await Person.create(person);
     res.status(CREATED).json(createRequest);
+  } catch(error) {
+    console.log(error);
   }
-  catch(error) {
+};
+
+const getAllPeople = async (req, res) => {
+  try {
+    const getRequest = await Person.find({})
+    res.status(SUCCESS).json(getRequest);
+  } catch(error) {
     console.log(error);
   }
 };
@@ -44,6 +52,7 @@ const deletePerson = (req, res) => {
 
 module.exports = {
   addPerson,
+  getAllPeople,
   getPerson,
   updatePerson,
   deletePerson,
