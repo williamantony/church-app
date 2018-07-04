@@ -44,10 +44,14 @@ const updatePerson = async (req, res) => {
   }
 };
 
-const deletePerson = (req, res) => {
-// Never Delete Record
-
-
+const deletePerson = async (req, res) => {
+  const { personId } = req.params;
+  try {
+    const deleteRequest = await Person.findOneAndRemove({ _id: personId });
+    res.status(SUCCESS).json(deleteRequest);
+  } catch(error) {
+    console.log(error);
+  }
 };
 
 module.exports = {
