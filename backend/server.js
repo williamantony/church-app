@@ -24,6 +24,14 @@ mongoose.connect(DBPATH, {}, () => {
   console.log(`Database is running`);
 });
 
+const routes = {
+  Person: require('./api/Person/Person.routes'),
+  User: require('./api/User/User.routes'),
+};
+
+routes.Person(server);
+routes.User(server);
+
 server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
