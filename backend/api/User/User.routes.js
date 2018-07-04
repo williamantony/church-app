@@ -6,6 +6,7 @@ const {
 } = require('./User.controller');
 
 const {
+  checkEligibility,
   validateEmailAddress,
   validateUsername,
   validatePasswordStrength,
@@ -18,6 +19,7 @@ module.exports = (server) => {
     
   server.route('/user')
     .post(
+      checkEligibility,
       validateEmailAddress,
       validateUsername,
       validatePasswordStrength,

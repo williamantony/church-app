@@ -7,6 +7,19 @@ const {
   SERVER_ERROR,
 } = require('../status.codes');
 
+const checkEligibility = async (req, res, next) => {
+  const { personId } = req.body;
+
+  if (!personId) {
+    res.status(SERVER_ERROR) .json({
+      error: 'You are not eligible to create account, please contact Technical Department',
+    });
+    return;
+  }
+
+  next();
+};
+
 const validateEmailAddress = async (req, res, next) => {
   const { email } = req.body;
   const foundEmail = await User.findOne({ email });
@@ -103,6 +116,7 @@ const verifyPassword = async (req, res, next) => {
 };
 
 module.exports = {
+  checkEligibility,
   validateEmailAddress,
   validateUsername,
   validatePasswordStrength,
