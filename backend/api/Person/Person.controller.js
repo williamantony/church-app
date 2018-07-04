@@ -16,13 +16,14 @@ const addPerson = async (req, res) => {
 };
 
 const getPerson = (req, res) => {
-  
+
 
 
 };
 
 const updatePerson = async (req, res) => {
-  const { personId, update } = req.body;
+  const { personId } = req.params;
+  const { update } = req.body;
   try {
     const updateRequest = await Person.findOneAndUpdate({ _id: personId }, update, { new: true });
     res.status(SUCCESS).json(updateRequest);
