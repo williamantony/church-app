@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { } from '../../redux/actions';
 import './Modal.css';
-import ModalInstance from '../ModalInstance/ModalInstance';
+import ModalInstance from './components/ModalInstance/ModalInstance';
 
 class Modal extends Component {
   constructor(props) {

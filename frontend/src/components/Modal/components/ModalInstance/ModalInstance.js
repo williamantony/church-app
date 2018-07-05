@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { showModal, hideModal, destroyModal } from '../../redux/actions';
-import './ModalInstance.css';
+import { showModal, hideModal, destroyModal } from '../../../../redux/actions';
 
 class ModalInstance extends Component {
   constructor(props) {
