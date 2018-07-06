@@ -145,8 +145,21 @@ export const registerUser = async (user) => {
   }
 };
 
-export const signin = () => {
-
+export const signin = async (user) => {
+  const endpoint = `${API_URL}/user/login`;
+  try {
+    const signinUserRequest = await axios.post(endpoint, user);
+    return {
+      type: USER_SIGNIN,
+      payload: signinUserRequest,
+    };
+  } catch (error) {
+    return showNotification({
+      type: 'ERROR',
+      title: 'ERROR',
+      message: error.response.data.error,
+    });
+  }
 };
 
 export const signout = () => {
