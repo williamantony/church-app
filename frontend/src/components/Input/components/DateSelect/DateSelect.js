@@ -93,7 +93,12 @@ class DateSelect extends Component {
       <DatePicker modalId={modalId} />
     );
 
-    this.props.showModal(selectorOptions, 'Pick a date', modalId);
+    const modalOptions = {
+      type: 'INPUT',
+      title: 'Pick a date',
+    };
+
+    this.props.showModal(selectorOptions, modalId, modalOptions);
   }
 
   showOptionsOnKeyDown = (event) => {
