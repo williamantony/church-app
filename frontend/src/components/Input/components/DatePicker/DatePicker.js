@@ -63,7 +63,12 @@ class DatePicker extends Component {
       />
     );
 
-    this.props.showModal(selectorOptions, 'Select Month', modalId);
+    const modalOptions = {
+      type: 'INPUT',
+      title: 'Select Month',
+    };
+
+    this.props.showModal(selectorOptions, modalId, modalOptions);
   }
 
   handleYearInput = (event) => {
