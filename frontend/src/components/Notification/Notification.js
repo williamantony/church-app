@@ -4,20 +4,6 @@ import { showModal } from '../../redux/actions';
 import './Notification.css';
 
 class Notification extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      type: null,
-      title: null,
-      message: null,
-    };
-  }
-
-  componentWillMount() {
-    this.setState({
-      ...this.props.notification,
-    });
-  }
 
   componentWillReceiveProps(props) {
     const {
@@ -26,22 +12,18 @@ class Notification extends Component {
       message,
     } = props.notification;
 
-    const notification = this.renderNotification();
+    const notification = this.renderNotification(message);
     const modalOptions = {
       type,
       title,
     };
     this.props.showModal(notification, null, modalOptions);
-
-    this.setState({
-      message,
-    });
   }
 
-  renderNotification = () => {
+  renderNotification = (message) => {
     return (
       <div className="Notification">
-        <div className="Notification__message">{this.state.message}</div>
+        <div className="Notification__message">{message}</div>
       </div>
     );
   }
