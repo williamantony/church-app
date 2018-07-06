@@ -96,7 +96,12 @@ class Select extends Component {
       />
     );
 
-    this.props.showModal(selectorOptions, label, modalId);
+    const modalOptions = {
+      type: 'INPUT',
+      title: label,
+    };
+
+    this.props.showModal(selectorOptions, modalId, modalOptions);
   }
 
   showOptionsOnKeyDown = (event) => {
