@@ -2,98 +2,38 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:5000';
 
-/**
- * User Authentication
- */
+// Notification
+export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
+// Modal
+export const DESTROY_MODAL = 'DESTROY_MODAL';
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const HIDE_MODAL = 'HIDE_MODAL';
+// Storage
+export const CREATE_STORAGE = 'CREATE_STORAGE';
+export const SET_STORAGE_DATA = 'SET_STORAGE_DATA';
+// Form
+export const CREATE_FORM = 'CREATE_FORM';
+export const SET_INPUT = 'SET_INPUT';
+// Authentication
 export const USER_REGISTER = 'USER_REGISTER';
 export const USER_SIGNIN = 'USER_SIGNIN';
 export const USER_SIGNOUT = 'USER_SIGNOUT';
 
 
-export const registerUser = async (user) => {
-  const endpoint = `${API_URL}/user`;
-  try {
-    const registerUserRequest = await axios.post(endpoint, user);
-    return {
-      type: USER_REGISTER,
-      payload: registerUserRequest,
-    };
-  } catch (error) {
-    return {
-      type: USER_REGISTER,
-      payload: {},
-    };
-  }
-};
-
-export const signin = () => {
-
-};
-
-export const signout = () => {
-
-};
-
 /**
- * Storage
+ * Notification
  */
-export const CREATE_STORAGE = 'CREATE_STORAGE';
-export const SET_STORAGE_DATA = 'SET_STORAGE_DATA';
-
-export const createStorage = (database = 'default', table = 'default') => {
+export const showNotification = (notification) => {
   return {
-    type: CREATE_STORAGE,
-    payload: {
-      database,
-      table,
-    },
+    type: SHOW_NOTIFICATION,
+    payload: notification,
   };
 };
 
-export const setStorageData = (data = {}, database = 'default', table = 'default') => {
-  return {
-    type: SET_STORAGE_DATA,
-    payload: {
-      database,
-      table,
-      data,
-    },
-  };
-};
-
-/**
- * Form Input
- */
-export const CREATE_FORM = 'CREATE_FORM';
-export const SET_INPUT = 'SET_INPUT';
-
-export const createForm = (form) => {
-  return {
-    type: CREATE_FORM,
-    payload: {
-      form,
-    },
-  };
-};
-
-export const setInput = (form, name, value) => {
-  return {
-    type: SET_INPUT,
-    payload: {
-      form,
-      name,
-      value,
-    },
-  };
-};
 
 /**
  * Modal
  */
-export const DESTROY_MODAL = 'DESTROY_MODAL';
-export const SHOW_MODAL = 'SHOW_MODAL';
-export const HIDE_MODAL = 'HIDE_MODAL';
-
 export const showModal = (content, modalId, options = {}) => {
   const defaultOptions = {
     type: 'DEFAULT',
@@ -135,14 +75,80 @@ export const destroyModal = (modalId) => {
   };
 };
 
-/**
- * Error
- */
-export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
 
-export const showNotification = (notification) => {
+/**
+ * Storage
+ */
+export const createStorage = (database = 'default', table = 'default') => {
   return {
-    type: SHOW_NOTIFICATION,
-    payload: notification,
+    type: CREATE_STORAGE,
+    payload: {
+      database,
+      table,
+    },
   };
+};
+
+export const setStorageData = (data = {}, database = 'default', table = 'default') => {
+  return {
+    type: SET_STORAGE_DATA,
+    payload: {
+      database,
+      table,
+      data,
+    },
+  };
+};
+
+
+/**
+ * Form Input
+ */
+export const createForm = (form) => {
+  return {
+    type: CREATE_FORM,
+    payload: {
+      form,
+    },
+  };
+};
+
+export const setInput = (form, name, value) => {
+  return {
+    type: SET_INPUT,
+    payload: {
+      form,
+      name,
+      value,
+    },
+  };
+};
+
+
+/**
+ * User Authentication
+ */
+export const registerUser = async (user) => {
+  const endpoint = `${API_URL}/user`;
+  try {
+    const registerUserRequest = await axios.post(endpoint, user);
+    return {
+      type: USER_REGISTER,
+      payload: registerUserRequest,
+    };
+  } catch (error) {
+    return showNotification({
+      type: 'ERROR',
+      title: 'ERROR',
+      message: error.response.data.error,
+    });
+  }
+};
+
+export const signin = () => {
+
+};
+
+export const signout = () => {
+
 };
