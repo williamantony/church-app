@@ -134,3 +134,15 @@ export const destroyModal = (modalId) => {
     },
   };
 };
+
+/**
+ * Error
+ */
+export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
+
+export const showNotification = (notification) => {
+  return {
+    type: SHOW_NOTIFICATION,
+    payload: notification,
+  };
+};
