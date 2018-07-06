@@ -12,6 +12,7 @@ import SignUp from './pages/SignUp/SignUp';
 import SignIn from './pages/SignIn/SignIn';
 import Error404 from './pages/Error404/Error404';
 import Modal from './components/Modal/Modal';
+import Notification from './components/Notification/Notification';
 
 const ReduxStore = createStore(Reducers, applyMiddleware(ReduxPromise, ReduxThunk));
 
@@ -25,6 +26,7 @@ ReactDOM.render(
           <Route component={Error404} />
         </Switch>
         <Modal />
+        <Notification />
       </div>
     </Router>
   </Provider>,
