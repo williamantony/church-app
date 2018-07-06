@@ -7,10 +7,12 @@ class ModalInstance extends Component {
     super(props);
     this.state = {
       id: props.id,
+      type: 'DEFAULT',
       title: null,
       content: null,
       isVisible: false,
       color: {
+        header: 'blue',
         bg: 'rgba(0, 0, 0, 0.5)',
       },
     };
@@ -19,7 +21,8 @@ class ModalInstance extends Component {
   componentWillMount() {
     const modal = this.props.modals[this.state.id];
     this.setState({
-      title: modal.title || null,
+      type: modal.options.type,
+      title: modal.options.title || null,
       content: modal.content || null,
     });
   }
@@ -50,23 +53,32 @@ class ModalInstance extends Component {
 
   render() {
     const {
-      isVisible, content, title, color,
+      isVisible,
+      type,
+      content,
+      title,
+      color,
     } = this.state;
 
     return (
-      <div className="Modal" data-visible={isVisible} data-type={'InputSelector'}>
+      <div className="Modal" data-visible={isVisible} data-type={type}>
         <div className="Modal__bg" style={{ backgroundColor: color.bg }} onClick={this.hideModal} />
         <div className="Modal__content">
           <div className="Modal__content__box">
-            <div className="Modal__header">
-              <div className="Modal__header__title">{title}</div>
-              <div className="Modal__close-button" onClick={this.hideModal}>
-                <div className="icon">
-                  <div className="line" />
-                  <div className="line" />
-                </div>
-              </div>
-            </div>
+            {
+              (title)
+                ? (
+                  <div className="Modal__header">
+                    <div className="Modal__header__title">{title}</div>
+                    <div className="Modal__close-button" onClick={this.hideModal}>
+                      <div className="icon">
+                        <div className="line" />
+                        <div className="line" />
+                      </div>
+                    </div>
+                  </div>
+                ) : null
+            }
             { content }
           </div>
         </div>
