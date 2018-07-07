@@ -8,15 +8,19 @@ import Button from '../../components/Button/Button';
 class SignUp extends Component {
   constructor(props) {
     super(props);
+    const { token } = props.match.params;
     this.state = {
       form: 'SignUp',
-      data: {},
+      data: {
+        personId: token,
+      },
     };
   }
 
   componentWillReceiveProps(props) {
     this.setState({
       data: {
+        ...this.state.data,
         ...props.formData[this.state.form],
       },
     });

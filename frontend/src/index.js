@@ -21,7 +21,7 @@ ReactDOM.render(
     <Router>
       <div>
         <Switch>
-          <Route exact path="/register" component={SignUp} />
+          <Route exact path="/register/:token?" component={SignUp} />
           <Route exact path="/login" component={SignIn} />
           <Route component={Error404} />
         </Switch>
