@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('./User.model');
+const Person = require('../Person/Person.model');
 
 const {
   UNAUTHORIZED,
@@ -9,8 +10,10 @@ const {
 
 const checkEligibility = async (req, res, next) => {
   const { personId } = req.body;
-
-  if (!personId) {
+  
+  const foundPersonId = await Person.findById(personId || 0);
+  
+  if (!foundPersonId) {
     res.status(SERVER_ERROR) .json({
       error: 'You are not eligible to create account, please contact Technical Department',
     });
