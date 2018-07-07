@@ -149,6 +149,7 @@ export const signin = async (user) => {
   const endpoint = `${API_URL}/user/login`;
   try {
     const signinUserRequest = await axios.post(endpoint, user);
+    localStorage.setItem('token', signinUserRequest.data.token);
     return {
       type: USER_SIGNIN,
       payload: signinUserRequest,
