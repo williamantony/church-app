@@ -22,6 +22,14 @@ const checkEligibility = async (req, res, next) => {
 
 const validateEmailAddress = async (req, res, next) => {
   const { email } = req.body;
+
+  if (!email) {
+    res.status(SERVER_ERROR) .json({
+      error: 'Email address is required, but not found in your request.',
+    });
+    return;
+  }
+
   const foundEmail = await User.findOne({ email });
 
   if (foundEmail) {
@@ -37,6 +45,13 @@ const validateEmailAddress = async (req, res, next) => {
 const validateUsername = (req, res, next) => {
   const { username } = req.body;
 
+  if (!username) {
+    res.status(SERVER_ERROR) .json({
+      error: 'Username is required, but not found in your request.',
+    });
+    return;
+  }
+
   if (username.length < 6) {
     res.status(USER_ERROR).json({
       error: 'Username should have alteast 6 characters',
@@ -49,6 +64,13 @@ const validateUsername = (req, res, next) => {
 
 const validatePasswordStrength = (req, res, next) => {
   const { password } = req.body;
+
+  if (!password) {
+    res.status(SERVER_ERROR) .json({
+      error: 'Password is required, but not found in your request.',
+    });
+    return;
+  }
 
   if (password.length < 8) {
     res.status(USER_ERROR).json({
