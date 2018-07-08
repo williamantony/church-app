@@ -1,0 +1,21 @@
+.Header {
+
+}
+.Header__bar {
+  display: flex;
+  justify-content: center;
+  background-color: #eee;
+}
+.Header__bar > .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1500px;
+  min-height: 75px;
+}
+.Header__logo {
+  width: 200px;
+  height: 35px;
+  background-color: #ddd;
+}
