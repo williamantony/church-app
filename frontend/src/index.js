@@ -8,9 +8,12 @@ import ReduxThunk from 'redux-thunk';
 import Reducers from './redux/reducers';
 
 import './index.css';
+// Pages
 import SignUp from './pages/SignUp/SignUp';
 import SignIn from './pages/SignIn/SignIn';
 import Error404 from './pages/Error404/Error404';
+// Components
+import Header from './components/Header/Header';
 import Modal from './components/Modal/Modal';
 import Notification from './components/Notification/Notification';
 
@@ -20,6 +23,7 @@ ReactDOM.render(
   <Provider store={ReduxStore}>
     <Router>
       <div>
+        <Header />
         <Switch>
           <Route exact path="/register/:token?" component={SignUp} />
           <Route exact path="/login" component={SignIn} />
