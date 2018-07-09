@@ -4,6 +4,7 @@ import form from './form.reducer';
 import modal from './modal.reducer';
 import notification from './notification.reducer';
 import user from './user.reducer';
+import people from './people.reducer';
 
 export default combineReducers({
   storage,
@@ -11,4 +12,5 @@ export default combineReducers({
   modal,
   notification,
   user,
+  people,
 });
