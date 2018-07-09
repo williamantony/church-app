@@ -2,7 +2,7 @@
 
 const {
   addPerson,
-  getAllPeople,
+  getPeopleByQuery,
   getPerson,
   updatePerson,
   deletePerson,
@@ -12,7 +12,7 @@ module.exports = (server) => {
 
   server.route('/person')
     .post(addPerson)
-    .get(getAllPeople);
+    .get(getPeopleByQuery);
   
   server.route('/person/:personId')
     .put(updatePerson)

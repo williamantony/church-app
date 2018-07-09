@@ -14,10 +14,11 @@ const addPerson = async (req, res) => {
   }
 };
 
-const getAllPeople = async (req, res) => {
+const getPeopleByQuery = async (req, res) => {
+  const { query } = req;
   try {
-    const getRequest = await Person.find({})
-    res.status(SUCCESS).json(getRequest);
+    const getByQueryRequest = await Person.find(query);
+    res.status(SUCCESS).json(getByQueryRequest);
   } catch(error) {
     console.log(error);
   }
@@ -56,7 +57,7 @@ const deletePerson = async (req, res) => {
 
 module.exports = {
   addPerson,
-  getAllPeople,
+  getPeopleByQuery,
   getPerson,
   updatePerson,
   deletePerson,
