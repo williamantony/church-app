@@ -10,10 +10,11 @@ const {
 
 const checkEligibility = async (req, res, next) => {
   const { personId } = req.body;
-  
-  const foundPersonId = await Person.findById(personId || 0);
-  
-  if (!foundPersonId) {
+
+  try {
+    const foundPerson = await Person.findById(personId);
+    if (!foundPerson) throw new Error();
+  } catch(e) {
     res.status(SERVER_ERROR) .json({
       error: 'You are not eligible to create account, please contact Technical Department',
     });
