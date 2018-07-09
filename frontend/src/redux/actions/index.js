@@ -18,6 +18,8 @@ export const SET_INPUT = 'SET_INPUT';
 export const USER_REGISTER = 'USER_REGISTER';
 export const USER_SIGNIN = 'USER_SIGNIN';
 export const USER_SIGNOUT = 'USER_SIGNOUT';
+// People
+export const GET_PEOPLE = 'GET_PEOPLE';
 
 
 /**
@@ -165,4 +167,27 @@ export const signin = async (user) => {
 
 export const signout = () => {
 
+};
+
+
+/**
+ * People/Directory
+ */
+export const getPeople = async (query) => {
+  const endpoint = `${API_URL}/person`;
+  try {
+    const getPeopleRequest = await axios.get(endpoint, {
+      params: query,
+    });
+    return {
+      type: GET_PEOPLE,
+      payload: getPeopleRequest,
+    };
+  } catch (error) {
+    return showNotification({
+      type: 'ERROR',
+      title: 'ERROR',
+      message: error.response.data.error,
+    });
+  }
 };
