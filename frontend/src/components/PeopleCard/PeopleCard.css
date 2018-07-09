@@ -1,0 +1,81 @@
+.PeopleCard {
+  position: relative;
+  max-width: 640px;
+  min-height: 225px;
+  border-radius: 5px;
+  background-color: #ddd;
+  margin: 100px auto 0px auto;
+}
+.PeopleCard__summary {
+  display: flex;
+  justify-content: flex-start;
+}
+.PeopleCard__thumb {
+  max-width: 225px;
+  height: 225px;
+  flex-basis: 40%;
+  background-color: #bbb;
+}
+.PeopleCard__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-basis: 60%;
+  min-width: calc(100% - 265px);
+  padding: 20px;
+  /* width: 100%; */
+}
+
+.PeopleCard__text {
+  font-family: 'Roboto', sans-serif;
+}
+.PeopleCard__display-name {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.PeopleCard__other-name {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  margin-top: 3px;
+  opacity: 0.5;
+}
+
+.PeopleCard__actions {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.PeopleCard__quick-links {
+  display: flex;
+  flex-basis: 50%;
+  width: 100%;
+  margin-top: 20px;
+}
+.PeopleCard__quick-link {
+  width: 50px;
+  height: 50px;
+  border-radius: 3px;
+  margin-right: 10px;
+  background-color: #bbb;
+}
+/* .PeopleCard__quick-link:not(:last-child) {
+  margin-right: 10px;
+} */
+.PeopleCard__more-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 50%;
+  min-width: 125px;
+  height: 50px;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  border-radius: 3px;
+  margin-top: 20px;
+  background-color: #bbb;
+}
