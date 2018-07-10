@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://10.0.0.50:5000';
 
 // Notification
 export const SHOW_NOTIFICATION = 'SHOW_NOTIFICATION';
@@ -19,6 +19,7 @@ export const USER_REGISTER = 'USER_REGISTER';
 export const USER_SIGNIN = 'USER_SIGNIN';
 export const USER_SIGNOUT = 'USER_SIGNOUT';
 // People
+export const ADD_PERSON = 'ADD_PERSON';
 export const GET_PEOPLE = 'GET_PEOPLE';
 
 
@@ -182,6 +183,23 @@ export const getPeople = async (query) => {
     return {
       type: GET_PEOPLE,
       payload: getPeopleRequest,
+    };
+  } catch (error) {
+    return showNotification({
+      type: 'ERROR',
+      title: 'ERROR',
+      message: error.response.data.error,
+    });
+  }
+};
+
+export const addPerson = async (person) => {
+  const endpoint = `${API_URL}/person`;
+  try {
+    const addPersonRequest = await axios.post(endpoint, person);
+    return {
+      type: ADD_PERSON,
+      payload: addPersonRequest,
     };
   } catch (error) {
     return showNotification({
