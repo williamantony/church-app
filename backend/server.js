@@ -19,7 +19,7 @@ server.use(bodyParser.json());
 
 mongoose.Promise = global.Promise;
 
-const DBPATH = `mongodb://${DBUSER}:${DBPASSWORD}@ds147890.mlab.com:47890/orgman`;
+const DBPATH = `mongodb://${DBUSER}:${DBPASSWORD}@ds149960.mlab.com:49960/church-app`;
 mongoose.connect(DBPATH, {}, () => {
   console.log(`Database is running`);
 });
