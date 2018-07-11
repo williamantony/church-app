@@ -34,10 +34,10 @@ class PeopleCard extends Component {
               </div>
               <div className="PeopleCard__actions">
                 <div className="PeopleCard__quick-links">
-                  <div className="PeopleCard__quick-link PeopleCard__quick-link--call"></div>
-                  <div className="PeopleCard__quick-link PeopleCard__quick-link--sms"></div>
-                  <div className="PeopleCard__quick-link PeopleCard__quick-link--email"></div>
-                  <div className="PeopleCard__quick-link PeopleCard__quick-link--map"></div>
+                  <div className="PeopleCard__quick-link PeopleCard__quick-link--call" />
+                  <div className="PeopleCard__quick-link PeopleCard__quick-link--sms" />
+                  <div className="PeopleCard__quick-link PeopleCard__quick-link--email" />
+                  <div className="PeopleCard__quick-link PeopleCard__quick-link--map" />
                 </div>
               </div>
               <div className="PeopleCard__more-button">See Contact Details</div>
