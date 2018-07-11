@@ -28,8 +28,8 @@ class PeoplesList extends Component {
     return (
       <div className="PeoplesList">
         {
-          this.state.peoples.map((people) => {
-            return <PeopleCard key={people._id} people={people} />;
+          this.state.peoples.map((person) => {
+            return <PeopleCard key={person._id} person={person} />;
           })
         }
       </div>
