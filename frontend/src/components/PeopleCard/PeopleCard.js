@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './PeopleCard.css';
+import PeopleFactSheet from '../PeopleFactSheet/PeopleFactSheet';
 
 class PeopleCard extends Component {
   constructor(props) {
@@ -13,14 +14,23 @@ class PeopleCard extends Component {
     } = props.person;
 
     this.state = {
+      person: props.person,
       displayName: `${firstname || ''} ${lastname || ''}`.trim(),
       otherName,
+      isFactSheetVisible: false,
     };
+  }
+
+  toggleFactSheetVisibility = (event) => {
+    event.preventDefault();
+    this.setState({
+      isFactSheetVisible: !this.state.isFactSheetVisible,
+    });
   }
 
   render() {
     return (
-      <div className="PeopleCard">
+      <div className="PeopleCard" data-factsheetvisible={this.state.isFactSheetVisible}>
         <div className="PeopleCard__content-holder">
           <div className="PeopleCard__summary">
             <div className="PeopleCard__thumb">
@@ -40,8 +50,13 @@ class PeopleCard extends Component {
                   <div className="PeopleCard__quick-link PeopleCard__quick-link--map" />
                 </div>
               </div>
-              <div className="PeopleCard__more-button">See Contact Details</div>
+              <div className="PeopleCard__more-button unselectable" onClick={this.toggleFactSheetVisibility} >
+                { this.state.isFactSheetVisible ? 'Hide' : 'See Contact Details' }
+              </div>
             </div>
+          </div>
+          <div className="PeopleCard__factSheet" data-visible={this.state.isFactSheetVisible}>
+            <PeopleFactSheet person={this.state.person} />
           </div>
         </div>
       </div>
