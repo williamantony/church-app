@@ -8,7 +8,7 @@
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1),
     0px 0px 0px 2px rgba(255, 255, 255, 0.75),
     0px 0px 5px 1px rgba(0, 0, 0, 0.1);
-  background-color: #f0f0f0;
+  background-color: #fff;
   margin: 0px auto;
   overflow: hidden;
 }
@@ -47,16 +47,19 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 200px;
   flex-basis: 100%;
-  min-width: calc(100% - 265px);
+  min-width: calc(100% - 265px);/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+40,000000+90&0+40,0.1+90 */
+  background: -moz-linear-gradient(top, rgba(0,0,0,0) 40%, rgba(0,0,0,0.1) 90%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 40%,rgba(0,0,0,0.1) 90%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 40%,rgba(0,0,0,0.1) 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#1a000000',GradientType=0 ); /* IE6-9 */
+  
 }
 
 .PeopleCard__text {
   font-family: 'Roboto', sans-serif;
   padding: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
 }
 .PeopleCard__display-name {
   color: #0d47a1;
@@ -74,24 +77,27 @@
 
 .PeopleCard__actions {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  padding: 10px 0px 10px 0px;
 }
 .PeopleCard__quick-links {
   display: flex;
-  flex-basis: 50%;
-  width: 100%;
+  align-items: center;
+  flex-basis: calc(100% - 60px);
+  min-height: 60px;
 }
 .PeopleCard__quick-link {
-  min-width: 70px;
+  flex-basis: 75px;
   height: 40px;
   background-size: auto 60%;
   background-position: center center;
   background-repeat: no-repeat;
   opacity: 0.75;
   cursor: pointer;
+}
+.PeopleCard__quick-link:not(:first-child) {
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
 }
 .PeopleCard__quick-link:not(:last-child) {
   border-right: 1px solid rgba(0, 0, 0, 0.1);
@@ -109,8 +115,47 @@
   background-image: url('./images/map-icon.png');
 }
 
+.PeopleCard__actions__more-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex-basis: 60px;
+  height: 60px;
+  border-radius: 5px 0px 0px 0px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background 0.25s ease-in-out 0s;
+}
+.PeopleCard[data-factsheetvisible="true"] .PeopleCard__actions__more-button {
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+.PeopleCard__actions__more-button__icon {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 0px;
+  background-image: url('./images/more-icon.png');
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transform: rotate(0deg) scale(0.75);
+  opacity: 0.5;
+  transition: border-radius 0.25s ease-in-out 0s,
+    transform 0.25s ease-in-out 0s,
+    opacity 0.25s ease-in-out 0s;
+}
+.PeopleCard[data-factsheetvisible="true"] .PeopleCard__actions__more-button__icon {
+  border-radius: 50%;
+  opacity: 0.25;
+  transform: rotate(45deg) scale(1.25);
+}
+
+
 .PeopleCard__more-button {
   display: flex;
+  display: none;
   justify-content: flex-start;
   align-items: center;
   min-width: 125px;
@@ -121,13 +166,15 @@
   letter-spacing: 0.25px;
   margin-top: 0px;
   padding-left: 20px;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.075);
+  background-color: #f0f0f0;
   cursor: pointer;
+  transition: background 0.25s ease-in-out 0s;
 }
 .PeopleCard[data-factsheetvisible="true"] .PeopleCard__more-button {
   justify-content: flex-end;
   padding-right: 20px;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: #f0f0f0;
 }
 
 .PeopleCard__factSheet {

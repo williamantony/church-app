@@ -49,9 +49,9 @@ class PeopleCard extends Component {
                   <div className="PeopleCard__quick-link PeopleCard__quick-link--email" />
                   <div className="PeopleCard__quick-link PeopleCard__quick-link--map" />
                 </div>
-              </div>
-              <div className="PeopleCard__more-button unselectable" onClick={this.toggleFactSheetVisibility} >
-                { this.state.isFactSheetVisible ? 'Hide' : 'See Contact Details' }
+                <div className="PeopleCard__actions__more-button" onClick={this.toggleFactSheetVisibility}>
+                  <div className="PeopleCard__actions__more-button__icon" />
+                </div>
               </div>
             </div>
           </div>
