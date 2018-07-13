@@ -11,8 +11,7 @@
 }
 .PeopleFactSheet__section {
   display: flex;
-  justify-content: flex-start;
-  padding: 15px 20px;
+  justify-content: space-between;
   border-top: 1px solid rgba(0, 0, 0, 0);
   border-bottom: 1px solid rgba(0, 0, 0, 0);
 }
@@ -29,28 +28,33 @@
 }
 
 .PeopleFactSheet__section__text {
-  
+  flex-basis: calc(100% - 70px);
+  padding: 15px 0px 15px 20px;
 }
 
 .PeopleFactSheet__section__button--update {
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-basis: 35px;
+  align-items: flex-start;
+  flex-basis: 50px;
   position: relative;
-  top: -10px;
-  left: -10px;
-  height: 35px;
-  background-image: url('./images/pencil.png');
-  background-size: 40% auto;
-  background-position: center center;
-  background-repeat: no-repeat;
-  opacity: 0.25;
+  opacity: 0.75;
+  background-color: rgba(0, 0, 0, 0);
   cursor: pointer;
-  transition: opacity 0.25s ease-in-out 0s;
+  transition: opacity 0.25s ease-in-out 0s, background 0.25s ease-in-out 0s;
 }
 .PeopleFactSheet__section__button--update:hover {
-  opacity: 0.5;
+  opacity: 1.0;
+  background-color: rgba(0, 0, 0, 0.025);
+}
+.PeopleFactSheet__section__button--update > .text {
+  color: #000000;
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  padding-top: 15px;
+  transition: transform 0.15s ease-in-out 0s;
 }
 
 .PeopleFactSheet__section-label {

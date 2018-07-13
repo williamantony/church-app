@@ -27,7 +27,6 @@ class PeopleFactSheet extends Component {
         <div className="PeopleFactSheet__title unselectable">Contact Information</div>
 
         <div className="PeopleFactSheet__section">
-          <div className="PeopleFactSheet__section__button--update" />
           <div className="PeopleFactSheet__section__text">
             <div className="PeopleFactSheet__section-label unselectable">Address</div>
             <div className="PeopleFactSheet__section-value">
@@ -36,10 +35,12 @@ class PeopleFactSheet extends Component {
               { `${this.state.address.city}, ${this.state.address.state} - ${this.state.address.zipcode}` }
             </div>
           </div>
+          <div className="PeopleFactSheet__section__button--update">
+            <div className="text unselectable">edit</div>
+          </div>
         </div>
 
         <div className="PeopleFactSheet__section">
-          <div className="PeopleFactSheet__section__button--update" />
           <div className="PeopleFactSheet__section__text">
             <div className="PeopleFactSheet__section-label unselectable">Phone Number</div>
             {
@@ -52,10 +53,12 @@ class PeopleFactSheet extends Component {
               })
             }
           </div>
+          <div className="PeopleFactSheet__section__button--update">
+            <div className="text unselectable">edit</div>
+          </div>
         </div>
 
         <div className="PeopleFactSheet__section">
-          <div className="PeopleFactSheet__section__button--update" />
           <div className="PeopleFactSheet__section__text">
             <div className="PeopleFactSheet__section-label unselectable">Email Address</div>
             {
@@ -67,6 +70,9 @@ class PeopleFactSheet extends Component {
                 );
               })
             }
+          </div>
+          <div className="PeopleFactSheet__section__button--update">
+            <div className="text unselectable">edit</div>
           </div>
         </div>
       </div>
