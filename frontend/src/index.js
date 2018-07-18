@@ -16,6 +16,12 @@ import Error404 from './pages/Error404/Error404';
 import Header from './components/Header/Header';
 import Modal from './components/Modal/Modal';
 import Notification from './components/Notification/Notification';
+import PeoplesList from './components/PeoplesList/PeoplesList';
+import CreatePerson from './pages/CreatePerson/CreatePerson';
+
+// For React Performance DEV-TOOL
+import { registerObserver } from 'react-perf-devtool';
+registerObserver();
 
 const ReduxStore = createStore(Reducers, applyMiddleware(ReduxPromise, ReduxThunk));
 
@@ -24,9 +30,11 @@ ReactDOM.render(
     <Router>
       <div>
         <Header />
+        <PeoplesList />
         <Switch>
           <Route exact path="/register/:token?" component={SignUp} />
           <Route exact path="/login" component={SignIn} />
+          <Route exact path="/person" component={CreatePerson} />
           <Route component={Error404} />
         </Switch>
         <Modal />
@@ -34,5 +42,5 @@ ReactDOM.render(
       </div>
     </Router>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
