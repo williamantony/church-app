@@ -10,6 +10,7 @@ class PeopleFactSheet extends Component {
       address: [
         {
           _id: '464647679796446465',
+          _label: 'Home',
           streetAddress: '5000 N Avers Ave',
           city: 'Chicago',
           state: 'IL',
@@ -17,7 +18,8 @@ class PeopleFactSheet extends Component {
         },
         {
           _id: '4646476797964446465',
-          streetAddress: '5000 N Washingtion Ave',
+          _label: 'Work',
+          streetAddress: '5000 N Washington Ave',
           city: 'Chicago',
           state: 'IL',
           zipcode: '60000',
@@ -50,7 +52,7 @@ class PeopleFactSheet extends Component {
     return (
       <div className="PeopleFactSheet">
         <div className="PeopleFactSheet__title unselectable">Profile Information</div>
-        
+
         <PeopleFactSection
           title="Address"
           data={this.state.address}
