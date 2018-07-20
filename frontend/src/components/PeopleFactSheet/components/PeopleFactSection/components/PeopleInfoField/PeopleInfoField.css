@@ -15,9 +15,10 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
 }
 .PeopleInfoField__set__row:not(:last-child) {
-  margin-bottom: -5px;
+  margin-bottom: -0px;
 }
 
 .PeopleInfoField__label {
