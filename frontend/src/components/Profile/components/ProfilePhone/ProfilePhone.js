@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './ProfilePhone.css';
 import InlineInput from '../../../InlineInput/InlineInput';
 
 class ProfilePhone extends Component {
@@ -14,7 +13,7 @@ class ProfilePhone extends Component {
   componentWillMount() {
     this.setState({
       phone: {
-        type: 'Residential',
+        type: 'primary',
         countryCode: '+1',
         number: '8888888888',
       },
@@ -25,10 +24,10 @@ class ProfilePhone extends Component {
     const { phone } = this.state;
 
     return (
-      <div className="ProfilePhone">
-        <div className="ProfilePhone__title">{ phone.type }</div>
-        <div className="ProfilePhoneItem">
-          <div className="ProfilePhoneItem__row">
+      <div className="ProfileSectionInfo">
+        <div className="ProfileSectionInfo__label">{ phone.type }</div>
+        <div className="ProfileSectionInfo__content">
+          <div className="ProfileSectionInfo__row">
             <InlineInput
               form="ProfileInputForm"
               name="countryCode"
