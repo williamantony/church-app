@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './PeopleCard.css';
-import PeopleFactSheet from '../PeopleFactSheet/PeopleFactSheet';
+import Profile from '../Profile/Profile';
 
 class PeopleCard extends Component {
   constructor(props) {
@@ -56,7 +56,7 @@ class PeopleCard extends Component {
             </div>
           </div>
           <div className="PeopleCard__factSheet" data-visible={this.state.isFactSheetVisible}>
-            <PeopleFactSheet person={this.state.person} />
+            <Profile person={this.state.person} />
           </div>
         </div>
       </div>
