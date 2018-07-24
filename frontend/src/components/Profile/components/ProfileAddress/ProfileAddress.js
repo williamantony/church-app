@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './ProfileAddress.css';
 import InlineInput from '../../../InlineInput/InlineInput';
 
 class ProfileAddress extends Component {
@@ -14,12 +13,13 @@ class ProfileAddress extends Component {
   componentWillMount() {
     this.setState({
       address: {
-        type: 'home',
-        streetAddress: '5721 N Kostner Ave',
+        type: 'Home',
+        streetAddress: '1600 Pennsylvania Ave NW',
         addressLine2: '',
-        city: 'Chicago',
-        state: 'IL',
-        zipcode: '60646',
+        city: 'Washington',
+        state: 'DC',
+        zipcode: '20500',
+        country: 'United States',
       },
     });
   }
@@ -28,10 +28,10 @@ class ProfileAddress extends Component {
     const { address } = this.state;
 
     return (
-      <div className="ProfileAddress">
-        <div className="ProfileAddress__title">{ address.type }</div>
-        <div className="ProfileAddressItem">
-          <div className="ProfileAddressItem__row">
+      <div className="ProfileSectionInfo">
+        <div className="ProfileSectionInfo__label">{ address.type }</div>
+        <div className="ProfileSectionInfo__content">
+          <div className="ProfileSectionInfo__row">
             <InlineInput
               form="ProfileInputForm"
               name="streetAddress"
@@ -40,7 +40,7 @@ class ProfileAddress extends Component {
             />
             <span className="comma">,</span>
           </div>
-          <div className="ProfileAddressItem__row">
+          <div className="ProfileSectionInfo__row">
             <InlineInput
               form="ProfileInputForm"
               name="addressLine2"
@@ -48,7 +48,7 @@ class ProfileAddress extends Component {
               value={address.addressLine2}
             />
           </div>
-          <div className="ProfileAddressItem__row">
+          <div className="ProfileSectionInfo__row">
             <InlineInput
               form="ProfileInputForm"
               name="city"
@@ -69,6 +69,14 @@ class ProfileAddress extends Component {
               placeholder="Zip Code"
               value={address.zipcode}
               maxLength={6}
+            />
+          </div>
+          <div className="ProfileSectionInfo__row">
+            <InlineInput
+              form="ProfileInputForm"
+              name="country"
+              placeholder="Country"
+              value={address.country}
             />
           </div>
         </div>
