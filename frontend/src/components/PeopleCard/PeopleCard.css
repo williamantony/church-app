@@ -48,12 +48,11 @@
   flex-direction: column;
   justify-content: space-between;
   flex-basis: 100%;
-  min-width: calc(100% - 265px);/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+40,000000+90&0+40,0.1+90 */
-  background: -moz-linear-gradient(top, rgba(0,0,0,0) 40%, rgba(0,0,0,0.1) 90%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 40%,rgba(0,0,0,0.1) 90%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 40%,rgba(0,0,0,0.1) 90%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#1a000000',GradientType=0 ); /* IE6-9 */
-  
+  min-width: calc(100% - 265px);
+  background: -moz-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 100%);
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%,rgba(0,0,0,0.05) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,0.05) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#1a000000',GradientType=0 );
 }
 
 .PeopleCard__text {
@@ -140,16 +139,16 @@
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
-  transform: rotate(0deg) scale(0.75);
-  opacity: 0.5;
+  transform: rotate(0deg) scale(1.0);
+  opacity: 0.25;
   transition: border-radius 0.25s ease-in-out 0s,
     transform 0.25s ease-in-out 0s,
-    opacity 0.25s ease-in-out 0s;
+    opacity 0.5s ease-in-out 0s;
 }
 .PeopleCard[data-factsheetvisible="true"] .PeopleCard__actions__more-button__icon {
   border-radius: 50%;
   opacity: 0.25;
-  transform: rotate(45deg) scale(1.25);
+  transform: rotate(45deg) scale(1);
 }
 
 
