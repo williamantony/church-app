@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './ProfileEmail.css';
 import InlineInput from '../../../InlineInput/InlineInput';
 
 class ProfileEmail extends Component {
@@ -14,6 +13,7 @@ class ProfileEmail extends Component {
   componentWillMount() {
     this.setState({
       email: {
+        type: 'primary',
         emailAddress: 'email@whitehouse.gov',
       },
     });
@@ -23,10 +23,10 @@ class ProfileEmail extends Component {
     const { email } = this.state;
 
     return (
-      <div className="ProfileEmail">
-        <div className="ProfileEmail__title">{ email.type }</div>
-        <div className="ProfileEmailItem">
-          <div className="ProfileEmailItem__row">
+      <div className="ProfileSectionInfo">
+        <div className="ProfileSectionInfo__label">{ email.type }</div>
+        <div className="ProfileSectionInfo__content">
+          <div className="ProfileSectionInfo__row">
             <InlineInput
               form="ProfileInputForm"
               name="emailAddress"
