@@ -12,7 +12,7 @@ class ProfileEditActions extends Component {
   
   render() {
     return (
-      <div className="ProfileEditActions">
+      <div className="ProfileEditActions unselectable">
         <div className="ProfileEditActions__button-group" data-type="edit">
           <div className="ProfileEditActions__button" data-type="edit">Edit Profile</div>
         </div>

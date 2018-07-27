@@ -38,10 +38,11 @@
   margin-right: 10px;
   border-radius: 3px;
   cursor: pointer;
-  transition: all 0.25s ease-in-out 0s;
+  transition: background 0.25s ease-in-out 0s,
+    color 0.25s ease-in-out 0s;
 }
 .ProfileEditActions__button:last-child {
-  margin-right: 25px;
+  margin-right: 20px;
 }
 .ProfileEditActions__button[data-type="edit"] {
   color: blue;
