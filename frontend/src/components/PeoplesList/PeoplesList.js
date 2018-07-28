@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPeople } from '../../redux/actions';
 import './PeoplesList.css';
-import PeopleCard from '../PeopleCard/PeopleCard';
+import PeoplesListItem from './components/PeoplesListItem/PeoplesListItem';
 
 class PeoplesList extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class PeoplesList extends Component {
       <div className="PeoplesList">
         {
           this.state.peoples.map((person) => {
-            return <PeopleCard key={person._id} person={person} />;
+            return <PeoplesListItem key={person._id} person={person} />;
           })
         }
       </div>

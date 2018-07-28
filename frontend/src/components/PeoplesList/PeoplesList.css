@@ -1,3 +1,5 @@
 .PeoplesList {
-
+  max-width: 640px;
+  padding: 100px 0px;
+  margin: 0px auto;
 }
