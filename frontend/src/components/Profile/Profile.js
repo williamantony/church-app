@@ -4,7 +4,6 @@ import './Profile.css';
 import ProfileAddress from './components/ProfileAddress/ProfileAddress';
 import ProfilePhone from './components/ProfilePhone/ProfilePhone';
 import ProfileEmail from './components/ProfileEmail/ProfileEmail';
-import ProfileEditActions from './components/ProfileEditActions/ProfileEditActions';
 
 class Profile extends Component {
   constructor(props) {
@@ -19,14 +18,8 @@ class Profile extends Component {
 
     return (
       <div className="Profile">
-        <div className="Profile__title">Profile Information</div>
         <div className="ProfileSection">
-          <div className="ProfileSection__head">
-            <div className="ProfileSection__title">Address</div>
-            <div className="ProfileSection__head-button">
-              edit
-            </div>
-          </div>
+          <div className="ProfileSection__title">Address</div>
           {
             profile.address.map((address) => {
               return <ProfileAddress key={address._id} address={address} />;
@@ -41,12 +34,7 @@ class Profile extends Component {
         </div>
 
         <div className="ProfileSection">
-          <div className="ProfileSection__head">
-            <div className="ProfileSection__title">Phone Number</div>
-            <div className="ProfileSection__head-button">
-              edit
-            </div>
-          </div>
+          <div className="ProfileSection__title">Phone Number</div>
           {
             profile.phone.map((phone) => {
               return <ProfilePhone key={phone._id} phone={phone} />;
@@ -61,12 +49,7 @@ class Profile extends Component {
         </div>
 
         <div className="ProfileSection">
-          <div className="ProfileSection__head">
-            <div className="ProfileSection__title">Email Address</div>
-            <div className="ProfileSection__head-button">
-              edit
-            </div>
-          </div>
+          <div className="ProfileSection__title">Email Address</div>
           {
             profile.emailAddress.map((email) => {
               return <ProfileEmail key={email._id} email={email} />;
@@ -79,7 +62,6 @@ class Profile extends Component {
             })
           }
         </div>
-        <ProfileEditActions />
       </div>
     );
   }
