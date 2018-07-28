@@ -10,6 +10,7 @@ class ModalInstance extends Component {
       type: 'DEFAULT',
       title: null,
       content: null,
+      align: 'TOP',
       isVisible: false,
       color: {
         header: 'blue',
@@ -22,6 +23,7 @@ class ModalInstance extends Component {
     const modal = this.props.modals[this.state.id];
     this.setState({
       type: modal.options.type,
+      align: modal.options.align || 'TOP',
       title: modal.options.title || null,
       content: modal.content || null,
     });
@@ -58,10 +60,16 @@ class ModalInstance extends Component {
       content,
       title,
       color,
+      align,
     } = this.state;
 
     return (
-      <div className="Modal" data-visible={isVisible} data-type={type}>
+      <div
+        className="Modal"
+        data-visible={isVisible}
+        data-type={type}
+        data-align={align}
+      >
         <div className="Modal__bg" style={{ backgroundColor: color.bg }} onClick={this.hideModal} />
         <div className="Modal__content">
           <div className="Modal__content__box">
