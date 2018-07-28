@@ -1,0 +1,48 @@
+.PeoplesListItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 75px;
+  background-color: #eee;
+  cursor: pointer;
+}
+.PeoplesListItem:not(:last-child) {
+  border-bottom: 1px solid #dddddd;
+}
+.PeoplesListItem__summary {
+  flex-basis: calc(100% - 50px);
+}
+.PeoplesListItem__name {
+  width: 100%;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 25px;
+  overflow: hidden;
+}
+.PeoplesListItem__subtext {
+  width: 100%;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 1px;
+  margin-left: 25px;
+  overflow: hidden;
+  opacity: 0.75;
+}
+.PeoplesListItem__icon {
+  flex-basis: 50px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.25);
+  background-image: url('./images/right-arrow.png');
+  background-size: 20px auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+}
