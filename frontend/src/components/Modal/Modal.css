@@ -110,6 +110,14 @@
   font-weight: 700;
 }
 
+.Modal__header-dupe {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  height: 40px;
+  margin-bottom: -40px;
+  z-index: 2;
+}
 .Modal__close-button {
   display: flex;
   justify-content: center;
@@ -145,5 +153,8 @@
   transform: rotate(45deg);
 }
 .Modal[data-type="WARN"] .Modal__close-button > .icon > .line {
+  background-color: #000;
+}
+.Modal__header-dupe .Modal__close-button > .icon > .line {
   background-color: #000;
 }
