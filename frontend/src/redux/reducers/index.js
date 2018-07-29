@@ -5,6 +5,7 @@ import modal from './modal.reducer';
 import notification from './notification.reducer';
 import user from './user.reducer';
 import people from './people.reducer';
+import profileInfo from './profileInfo.reducer';
 
 export default combineReducers({
   storage,
@@ -13,4 +14,5 @@ export default combineReducers({
   notification,
   user,
   people,
+  profileInfo,
 });
