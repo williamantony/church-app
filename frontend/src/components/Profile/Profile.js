@@ -1,66 +1,127 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Profile.css';
-import ProfileAddress from './components/ProfileAddress/ProfileAddress';
-import ProfilePhone from './components/ProfilePhone/ProfilePhone';
-import ProfileEmail from './components/ProfileEmail/ProfileEmail';
+import ProfileInformation from '../ProfileInformation/ProfileInformation';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
+
+    const {
+      firstname,
+      lastname,
+      otherName,
+    } = props.person;
+
     this.state = {
-      profile: props.person,
+      person: props.person,
+      displayName: `${firstname || ''} ${lastname || ''}`.trim(),
+      otherName,
+      status: {
+        isAuthUser: true,
+        isVisible: false,
+        isEditing: false,
+      },
     };
   }
 
+  componentWillReceiveProps(props) {
+    this.setState({
+      ...this.state,
+      status: {
+        ...this.state.status,
+        isVisible: props.profileInfo.isVisible,
+      },
+    });
+  }
+
+  startEditing = () => {
+    this.setState({
+      ...this.state,
+      status: {
+        ...this.state.status,
+        isEditing: true,
+      },
+    });
+  }
+
+  stopEditing = () => {
+    this.setState({
+      ...this.state,
+      status: {
+        ...this.state.status,
+        isEditing: false,
+      },
+    });
+  }
+
   render() {
-    const { profile } = this.state;
+    const {
+      isAuthUser,
+      isVisible,
+      isEditing,
+    } = this.state.status;
 
     return (
       <div className="Profile">
-        <div className="ProfileSection">
-          <div className="ProfileSection__title">Address</div>
-          {
-            profile.address.map((address) => {
-              return <ProfileAddress key={address._id} address={address} />;
-            })
-          }
-          {
-            // This is only for demo
-            [0].map((address, index) => {
-              return <ProfileAddress key={address._id + index} address={address} />;
-            })
-          }
-        </div>
+        <div className="Profile__content">
+          <div className="Profile__summary">
+            <div className="Profile__text">
+              <div className="Profile__display-name">{this.state.displayName}</div>
+              <div className="Profile__other-name">{this.state.otherName}</div>
+            </div>
+            <div className="Profile__actions unselectable">
+              <div
+                className="Profile__actions-layer"
+                data-when="default"
+                data-visible={!isEditing}
+              >
+                <div className="Profile__actions-layer__content">
+                  <div className="Profile__quick-links">
+                    <div className="Profile__quick-link" data-type="call">
+                      <div className="holder">
+                        <div className="icon" />
+                        <div className="text">Call</div>
+                      </div>
+                    </div>
+                    <div className="Profile__quick-link" data-type="map">
+                      <div className="holder">
+                        <div className="icon" />
+                        <div className="text">Direction</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="Profile__quick-button"
+                    data-type="edit"
+                    data-visible={isVisible}
+                    onClick={this.startEditing}
+                  >
+                    <div className="icon" />
+                    <div className="text">Edit</div>
+                  </div>
+                </div>
+              </div>
 
-        <div className="ProfileSection">
-          <div className="ProfileSection__title">Phone Number</div>
-          {
-            profile.phone.map((phone) => {
-              return <ProfilePhone key={phone._id} phone={phone} />;
-            })
-          }
-          {
-            // This is only for demo
-            [0].map((phone, index) => {
-              return <ProfilePhone key={phone._id + index} phone={phone} />;
-            })
-          }
-        </div>
-
-        <div className="ProfileSection">
-          <div className="ProfileSection__title">Email Address</div>
-          {
-            profile.emailAddress.map((email) => {
-              return <ProfileEmail key={email._id} email={email} />;
-            })
-          }
-          {
-            // This is only for demo
-            [0].map((email, index) => {
-              return <ProfileEmail key={email._id + index} email={email} />;
-            })
-          }
+              <div
+                className="Profile__actions-layer"
+                data-when="editing"
+                data-visible={isVisible && isAuthUser && isEditing}
+              >
+                <div className="Profile__actions-layer__content">
+                  <div className="Profile__quick-button" data-type="discard" onClick={this.stopEditing}>
+                    <div className="icon" />
+                    <div className="text">Discard</div>
+                  </div>
+                  <div className="Profile__quick-button" data-type="save" onClick={this.stopEditing}>
+                    <div className="icon" />
+                    <div className="text">Save</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ProfileInformation person={this.state.person} />
         </div>
       </div>
     );
@@ -69,7 +130,9 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return state;
+  return {
+    profileInfo: state.profileInfo,
+  };
 };
 
 const mapDispatchToProps = {
