@@ -21,6 +21,8 @@ export const USER_SIGNOUT = 'USER_SIGNOUT';
 // People
 export const ADD_PERSON = 'ADD_PERSON';
 export const GET_PEOPLE = 'GET_PEOPLE';
+// Profile Information
+export const SET_PROFILE_INFO_VISIBILITY = 'SET_PROFILE_INFO_VISIBILITY';
 
 
 /**
@@ -208,4 +210,17 @@ export const addPerson = async (person) => {
       message: error.response.data.error,
     });
   }
+};
+
+
+/**
+ * Profile Information
+ */
+export const setProfileInfoVisibility = (isVisible = false) => {
+  return {
+    type: SET_PROFILE_INFO_VISIBILITY,
+    payload: {
+      isVisible,
+    },
+  };
 };
