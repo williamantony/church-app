@@ -12,6 +12,7 @@ class InlineInput extends Component {
       name: props.name || 'default',
       placeholder: props.placeholder || '',
       value: props.value || '',
+      isReadOnly: props.isReadOnly || false,
       maxLength: props.maxLength || 256,
       inputField: React.createRef(),
       testInput: React.createRef(),
@@ -34,14 +35,28 @@ class InlineInput extends Component {
     const {
       form,
       name,
+      isReadOnly,
     } = this.state;
 
     const value = props.formData[form][name];
 
+    let needToSetState = false;
+    const newState = {};
+
+    if (isReadOnly !== props.isReadOnly) {
+      needToSetState = true;
+      newState.isReadOnly = props.isReadOnly;
+    }
+
     if (value !== undefined) {
       if (value !== this.state.value) {
-        this.setState({ value });
+        needToSetState = true;
+        newState.value = value;
       }
+    }
+
+    if (needToSetState) {
+      this.setState({ ...newState });
     }
   }
 
@@ -53,6 +68,10 @@ class InlineInput extends Component {
     }
 
     if (nextState.value !== this.state.value) {
+      shouldUpdate = true;
+    }
+
+    if (nextState.isReadOnly !== this.state.isReadOnly) {
       shouldUpdate = true;
     }
 
@@ -112,6 +131,7 @@ class InlineInput extends Component {
       name,
       placeholder,
       value,
+      isReadOnly,
       inputField,
       haveRecalculatedInputWidth,
     } = this.state;
@@ -128,6 +148,8 @@ class InlineInput extends Component {
       }, 1000);
     }
 
+    console.log(isReadOnly, this.state.isReadOnly);
+
     return (
       <div className="InlineInput">
         <input
@@ -138,6 +160,7 @@ class InlineInput extends Component {
           placeholder={placeholder}
           onChange={this.handleInput}
           className="InlineInput__input"
+          readOnly={isReadOnly}
           style={style}
         />
         <div
