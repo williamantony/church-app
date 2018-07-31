@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setProfileInfoVisibility } from '../../redux/actions';
+import { setProfileInfoOptions } from '../../redux/actions';
 import './ProfileInformation.css';
 import ProfileAddress from './components/ProfileAddress/ProfileAddress';
 import ProfilePhone from './components/ProfilePhone/ProfilePhone';
@@ -23,13 +23,17 @@ class ProfileInformation extends Component {
 
   componentWillUnmount() {
     if (this.state.isInformationVisible) {
-      this.props.setProfileInfoVisibility(false);
+      this.props.setProfileInfoOptions({
+        isVisible: false,
+      });
     }
   }
 
   toggleInformationVisibility = (event) => {
     event.preventDefault();
-    this.props.setProfileInfoVisibility(!this.state.isInformationVisible);
+    this.props.setProfileInfoOptions({
+      isVisible: !this.state.isInformationVisible,
+    });
   }
 
   render() {
@@ -107,7 +111,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  setProfileInfoVisibility,
+  setProfileInfoOptions,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileInformation);

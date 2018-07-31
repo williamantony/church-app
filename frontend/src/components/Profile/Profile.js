@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { setProfileInfoOptions } from '../../redux/actions';
 import './Profile.css';
 import ProfileInformation from '../ProfileInformation/ProfileInformation';
 
@@ -26,32 +27,30 @@ class Profile extends Component {
   }
 
   componentWillReceiveProps(props) {
+    const {
+      isVisible,
+      isEditing,
+    } = props.profileInfo;
+
     this.setState({
       ...this.state,
       status: {
         ...this.state.status,
-        isVisible: props.profileInfo.isVisible,
+        isVisible,
+        isEditing,
       },
     });
   }
 
   startEditing = () => {
-    this.setState({
-      ...this.state,
-      status: {
-        ...this.state.status,
-        isEditing: true,
-      },
+    this.props.setProfileInfoOptions({
+      isEditing: true,
     });
   }
 
   stopEditing = () => {
-    this.setState({
-      ...this.state,
-      status: {
-        ...this.state.status,
-        isEditing: false,
-      },
+    this.props.setProfileInfoOptions({
+      isEditing: false,
     });
   }
 
@@ -136,7 +135,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-
+  setProfileInfoOptions,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
