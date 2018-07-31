@@ -1,17 +1,18 @@
 import {
-  SET_PROFILE_INFO_VISIBILITY,
+  SET_PROFILE_INFO_OPTIONS,
 } from '../actions';
 
 const initialState = {
   isVisible: false,
+  isEditing: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_PROFILE_INFO_VISIBILITY:
+    case SET_PROFILE_INFO_OPTIONS:
       return {
         ...state,
-        isVisible: action.payload.isVisible,
+        ...action.payload.options,
       };
 
     default:
