@@ -22,7 +22,7 @@ export const USER_SIGNOUT = 'USER_SIGNOUT';
 export const ADD_PERSON = 'ADD_PERSON';
 export const GET_PEOPLE = 'GET_PEOPLE';
 // Profile Information
-export const SET_PROFILE_INFO_VISIBILITY = 'SET_PROFILE_INFO_VISIBILITY';
+export const SET_PROFILE_INFO_OPTIONS = 'SET_PROFILE_INFO_OPTIONS';
 
 
 /**
@@ -216,11 +216,11 @@ export const addPerson = async (person) => {
 /**
  * Profile Information
  */
-export const setProfileInfoVisibility = (isVisible = false) => {
+export const setProfileInfoOptions = (options = {}) => {
   return {
-    type: SET_PROFILE_INFO_VISIBILITY,
+    type: SET_PROFILE_INFO_OPTIONS,
     payload: {
-      isVisible,
+      options,
     },
   };
 };
