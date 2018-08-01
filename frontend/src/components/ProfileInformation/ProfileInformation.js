@@ -12,12 +12,19 @@ class ProfileInformation extends Component {
     this.state = {
       profile: props.person,
       isInformationVisible: false,
+      isEditing: false,
     };
   }
 
   componentWillReceiveProps(props) {
+    const {
+      isVisible,
+      isEditing,
+    } = props.profileInfo;
+
     this.setState({
-      isInformationVisible: props.profileInfo.isVisible,
+      isInformationVisible: isVisible,
+      isEditing,
     });
   }
 
@@ -25,6 +32,7 @@ class ProfileInformation extends Component {
     if (this.state.isInformationVisible) {
       this.props.setProfileInfoOptions({
         isVisible: false,
+        isEditing: false,
       });
     }
   }
@@ -40,6 +48,7 @@ class ProfileInformation extends Component {
     const {
       profile,
       isInformationVisible,
+      isEditing,
     } = this.state;
 
     return (
@@ -49,9 +58,14 @@ class ProfileInformation extends Component {
           data-information-visible={isInformationVisible}
           onClick={this.toggleInformationVisibility}
         >
-          See Details
+          <div className="text">See Details</div>
         </div>
         <div className="ProfileInformationSections" data-visible={isInformationVisible}>
+          <div className="ProfileInformation__edit-mode" data-editable={isEditing}>
+            <div className="text">
+              You're in <span className="highlight">Editing</span> Mode
+            </div>
+          </div>
           <div className="ProfileInformation__title">Profile information</div>
           <div className="ProfileSection">
             <div className="ProfileSection__title">Address</div>
