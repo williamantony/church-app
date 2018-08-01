@@ -1,5 +1,17 @@
 .InlineInput {
-
+  max-height: 100px;
+  opacity: 1.0;
+  overflow: hidden;
+  transition: opacity 0.25s ease-in-out 0s,
+    max-height 0.25s ease-in-out 0s;
+}
+[data-single-input="true"] > .InlineInput[data-readonly="false"][data-empty="true"] {
+  max-height: 100px;
+  opacity: 1.0;
+}
+[data-single-input="true"] > .InlineInput[data-readonly="true"][data-empty="true"] {
+  max-height: 0px;
+  opacity: 0;
 }
 
 input.InlineInput__input {
@@ -9,6 +21,7 @@ input.InlineInput__input {
   outline: 0px;
   padding: 5px 10px 5px 10px;
   background-color: transparent;
+  transition: padding 0.25s ease-in-out 0s;
 }
 input.InlineInput__input,
 .InlineInput__testInput {
@@ -24,9 +37,12 @@ input.InlineInput__input[value=""] {
   opacity: 0.75;
 }
 input.InlineInput__input[value=""],
-input.InlineInput__input:focus {
+input.InlineInput__input:not([readonly]):focus {
   box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 1);
   background-color: rgba(0, 0, 0, 0.075);
+}
+input.InlineInput__input[readonly] {
+  padding: 2.5px 10px 2.5px 10px;
 }
 
 .InlineInput__testInput {

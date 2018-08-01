@@ -148,10 +148,8 @@ class InlineInput extends Component {
       }, 1000);
     }
 
-    console.log(isReadOnly, this.state.isReadOnly);
-
     return (
-      <div className="InlineInput">
+      <div className="InlineInput" data-empty={value === ''} data-readonly={isReadOnly}>
         <input
           ref={inputField}
           type={type}
