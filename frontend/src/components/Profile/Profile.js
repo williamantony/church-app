@@ -96,7 +96,6 @@ class Profile extends Component {
                     data-visible={isVisible}
                     onClick={this.startEditing}
                   >
-                    <div className="icon" />
                     <div className="text">Edit</div>
                   </div>
                 </div>
@@ -108,13 +107,11 @@ class Profile extends Component {
                 data-visible={isVisible && isAuthUser && isEditing}
               >
                 <div className="Profile__actions-layer__content">
+                  <div className="Profile__quick-button" data-type="save" onClick={this.stopEditing}>
+                    <div className="text">Save</div>
+                  </div>
                   <div className="Profile__quick-button" data-type="discard" onClick={this.stopEditing}>
                     <div className="icon" />
-                    <div className="text">Discard</div>
-                  </div>
-                  <div className="Profile__quick-button" data-type="save" onClick={this.stopEditing}>
-                    <div className="icon" />
-                    <div className="text">Save</div>
                   </div>
                 </div>
               </div>

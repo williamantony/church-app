@@ -35,8 +35,7 @@
 
 .Profile__actions {
   position: relative;
-  height: 49px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  height: 50px;
 }
 .Profile__actions-layer {
   position: absolute;
@@ -92,38 +91,43 @@
 }
 
 .Profile__quick-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;  
-  position: relative;
-  height: 49px;
-  box-shadow: inset 0px -25px 0px 0px rgba(0, 0, 0, 0);
+  margin-right: 3px;
   cursor: pointer;
-  transition: box-shadow 0.15s ease-in-out 0s;
 }
-.Profile__quick-link:active {
-  box-shadow: inset 0px -20px 100px -20px rgba(0, 0, 0, 0.25);
+.Profile__quick-link:first-child {
+  margin-left: 7px;
+}
+.Profile__quick-link:not(:last-child) {
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
 }
 .Profile__quick-link > .holder {
   display: flex;
   justify-content: center;
-  align-items: center;  
-  position: relative;
-  padding: 5px 20px;
+  align-items: center;
+  height: 35px;
+  border-radius: 3px;
+  margin-right: 3px;
+  padding: 0px 15px 0px 5px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease-in-out 0s;
 }
-.Profile__quick-link:not(:last-child) > .holder{
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+.Profile__quick-link:active > .holder {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .Profile__quick-link > .holder > .icon {
-  width: 17px;
-  height: 17px;
-  margin-right: 7px;
-  background-size: contain;
+  position: relative;
+  width: 35px;
+  height: 35px;
+  background-size: 50%;
   background-position: center center;
   background-repeat: no-repeat;
   opacity: 0.65;
   transition: opacity 0.15s ease-in-out 0s;
+}
+.Profile__quick-link:active > .holder > .icon {
+  opacity: 1.0;
 }
 
 .Profile__quick-link[data-type="call"] > .holder > .icon {
@@ -140,34 +144,27 @@
 }
 
 .Profile__quick-link > .holder > .text {
-  font-size: 15px;
+  color: #000;
+  font-size: 14px;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   letter-spacing: 0.5px;
-  text-shadow: 0px 0px 0.1px rgba(0, 0, 0, 0);
-  opacity: 0.5;
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+  opacity: 0.65;
   transition: opacity 0.15s ease-in-out 0s,
     text-shadow 0.15s ease-in-out 0s;
 }
-.Profile__quick-link:active > .holder > .icon,
 .Profile__quick-link:active > .holder > .text {
+  text-shadow: 0px 0px 0.1px rgba(0, 0, 0, 0.5);
   opacity: 1.0;
-  text-shadow: 0px 0px 0.05px rgba(0, 0, 0, 0.5);
 }
 
 .Profile__quick-button {
   display: flex;
+  justify-content: center;
   align-items: center;
   height: 35px;
-  color: #000;
-  font-size: 14px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
-  padding: 0px 20px;
-  margin-right: 10px;
+  margin-right: 7px;
   border-radius: 3px;
   cursor: pointer;
   transition: background 0.25s ease-in-out 0s,
@@ -176,28 +173,63 @@
 .Profile__quick-button:first-child {
   margin-left: 20px;
 }
-.Profile__quick-button:last-child {
-  margin-right: 20px;
+.Profile__quick-button > .text {
+  color: #000;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+  padding: 0px 35px;
+}
+.Profile__quick-button > .icon {
+  position: relative;
+  width: 35px;
+  height: 35px;
+  background-size: 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .Profile__quick-button[data-type="edit"] {
-  color: blue;
+  height: 30px;
+  margin-right: 10px;
+  background-color: dodgerblue;
+}
+.Profile__quick-button[data-type="edit"] > .text {
+  color: #fff;
+  padding: 0px 20px;
 }
 
 .Profile__quick-button[data-type="save"] {
-  color: #fff;
+  min-width: 50px;
   background-color: rgb(76, 175, 80);
 }
 .Profile__quick-button[data-type="save"]:hover {
   background-color: rgb(46, 125, 50);
 }
+.Profile__quick-button[data-type="save"] > .text {
+  color: #fff;
+}
 
 .Profile__quick-button[data-type="discard"] {
-  color: rgb(255, 87, 34);
+  background-color: #777777;
 }
 .Profile__quick-button[data-type="discard"]:hover {
-  color: #000;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: #555555;
+}
+.Profile__quick-button[data-type="discard"] > .text {
+  color: darkred;
+  font-size: 12px;
+  padding: 0px 15px;
+}
+.Profile__quick-button[data-type="discard"]:hover > .text {
+  color: #fff;
+}
+.Profile__quick-button[data-type="discard"] > .icon {
+  background-image: url('./images/cancel-icon.png');
+  background-size: 35%;
 }
 
 .Profile__quick-button[data-visible="false"] {
