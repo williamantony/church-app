@@ -52,9 +52,9 @@ class ProfileInformation extends Component {
     } = this.state;
 
     return (
-      <div className="ProfileInformation">
+      <div className="ProfileInformation unselectable">
         <div
-          className="ProfileInformation__toggle-button unselectable"
+          className="ProfileInformation__toggle-button"
           data-information-visible={isInformationVisible}
           onClick={this.toggleInformationVisibility}
         >
@@ -62,9 +62,7 @@ class ProfileInformation extends Component {
         </div>
         <div className="ProfileInformationSections" data-visible={isInformationVisible}>
           <div className="ProfileInformation__edit-mode" data-editable={isEditing}>
-            <div className="text">
-              You're in <span className="highlight">Editing</span> Mode
-            </div>
+            <div className="text">Editing Mode</div>
           </div>
           <div className="ProfileInformation__title">Profile information</div>
           <div className="ProfileSection">

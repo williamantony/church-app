@@ -13,7 +13,7 @@
 }
 
 .Profile__summary {
-  background-color: #eeeeee;
+  background-color: rgba(0, 0, 0, 0.025);
 }
 .Profile__text {
   font-family: 'Roboto', sans-serif;
@@ -98,7 +98,7 @@
   margin-left: 7px;
 }
 .Profile__quick-link:not(:last-child) {
-  border-right: 1px solid rgba(0, 0, 0, 0.15);
+  border-right: 1px solid rgba(0, 0, 0, 0.075);
 }
 .Profile__quick-link > .holder {
   display: flex;
@@ -113,7 +113,7 @@
   transition: background 0.15s ease-in-out 0s;
 }
 .Profile__quick-link:active > .holder {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .Profile__quick-link > .holder > .icon {
