@@ -7,6 +7,7 @@ class ProfilePhone extends Component {
     super(props);
     this.state = {
       phone: props.phone,
+      isReadOnly: false,
     };
   }
 
@@ -20,8 +21,17 @@ class ProfilePhone extends Component {
     });
   }
 
+  componentWillReceiveProps(props) {
+    this.setState({
+      isReadOnly: !props.profileInfo.isEditing,
+    });
+  }
+
   render() {
-    const { phone } = this.state;
+    const {
+      phone,
+      isReadOnly,
+    } = this.state;
 
     return (
       <div className="ProfileSectionInfo">
@@ -30,15 +40,17 @@ class ProfilePhone extends Component {
           <div className="ProfileSectionInfo__row">
             <InlineInput
               form="ProfileInputForm"
-              name="countryCode"
+              name={`countryCode_${phone.type}`}
               placeholder="+1"
               value={phone.countryCode}
+              isReadOnly={isReadOnly}
             />
             <InlineInput
               form="ProfileInputForm"
-              name="number"
+              name={`number_${phone.type}`}
               placeholder="(000) 000-0000"
               value={phone.number}
+              isReadOnly={isReadOnly}
             />
           </div>
         </div>
@@ -49,7 +61,9 @@ class ProfilePhone extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return state;
+  return {
+    profileInfo: state.profileInfo,
+  };
 };
 
 const mapDispatchToProps = {
