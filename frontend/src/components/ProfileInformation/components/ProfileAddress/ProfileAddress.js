@@ -44,7 +44,7 @@ class ProfileAddress extends Component {
           <div className="ProfileSectionInfo__row" data-single-input="true">
             <InlineInput
               form="ProfileInputForm"
-              name="streetAddress"
+              name={`streetAddress_${address.type}`}
               placeholder="Street Address"
               value={address.streetAddress}
               isReadOnly={isReadOnly}
@@ -54,7 +54,7 @@ class ProfileAddress extends Component {
           <div className="ProfileSectionInfo__row" data-single-input="true">
             <InlineInput
               form="ProfileInputForm"
-              name="addressLine2"
+              name={`addressLine2_${address.type}`}
               placeholder="Line 2"
               value={address.addressLine2}
               isReadOnly={isReadOnly}
@@ -63,7 +63,7 @@ class ProfileAddress extends Component {
           <div className="ProfileSectionInfo__row">
             <InlineInput
               form="ProfileInputForm"
-              name="city"
+              name={`city_${address.type}`}
               placeholder="City"
               value={address.city}
               isReadOnly={isReadOnly}
@@ -71,7 +71,7 @@ class ProfileAddress extends Component {
             <span className="comma">,</span>
             <InlineInput
               form="ProfileInputForm"
-              name="state"
+              name={`state_${address.type}`}
               placeholder="State"
               value={address.state}
               isReadOnly={isReadOnly}
@@ -79,7 +79,7 @@ class ProfileAddress extends Component {
             <span className="hyphen">-</span>
             <InlineInput
               form="ProfileInputForm"
-              name="zipcode"
+              name={`zipcode_${address.type}`}
               placeholder="Zip Code"
               value={address.zipcode}
               isReadOnly={isReadOnly}
@@ -89,7 +89,7 @@ class ProfileAddress extends Component {
           <div className="ProfileSectionInfo__row" data-single-input="true">
             <InlineInput
               form="ProfileInputForm"
-              name="country"
+              name={`country_${address.type}`}
               placeholder="Country"
               value={address.country}
               isReadOnly={isReadOnly}
