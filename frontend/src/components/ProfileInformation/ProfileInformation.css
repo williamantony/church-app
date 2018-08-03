@@ -48,43 +48,35 @@
   opacity: 0;
 }
 
-.ProfileInformation__edit-mode {
-  position: relative;
-  overflow: hidden;
-  transition: opacity 0.25s ease-in-out 0s,
-    max-height 0.25s ease-in-out 0s;
+.ProfileInformation__title {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 35px;
+  padding: 0px 20px;
 }
-.ProfileInformation__edit-mode[data-editable="true"] {
-  max-height: 35px;
-  opacity: 1.0;
-}
-.ProfileInformation__edit-mode[data-editable="false"] {
-  max-height: 0px;
-  opacity: 0;
-}
-.ProfileInformation__edit-mode > .text {
-  color: rgba(0, 0, 0, 0.3);
-  font-size: 12px;
+.ProfileInformation__title > .text {
+  position: absolute;
+  color: #999999;
+  font-size: 14px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
-  text-align: left;
-  letter-spacing: 1.5px;
-  word-spacing: 1.5px;
-  text-transform: uppercase;
-  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.75);
-  padding: 10px 0px 15px 20px;
-  box-shadow: inset 0px 25px 50px -25px rgba(0, 0, 0, 0.25);
-}
-
-.ProfileInformation__title {
-  color: #777777;
-  font-size: 16px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
   letter-spacing: 2px;
-  word-spacing: 3px;
+  word-spacing: 2px;
   text-transform: uppercase;
-  padding: 25px 20px 0px 20px;
+  margin-left: 0px;
+  transition: opacity 0.25s ease-in-out 0s,
+    margin-left 0.25s ease-in-out 0s;
+}
+.ProfileInformation__title[data-editing="false"] > .text[data-type="default"],
+.ProfileInformation__title[data-editing="true"] > .text[data-type="editing"] {
+  opacity: 1.0;
+  margin-left: 0px;
+}
+.ProfileInformation__title[data-editing="true"] > .text[data-type="default"],
+.ProfileInformation__title[data-editing="false"] > .text[data-type="editing"] {
+  opacity: 0;
+  margin-left: 25px;
 }
 
 .ProfileInformationSections {
@@ -129,14 +121,52 @@
   padding: 10px 0px;
 }
 .ProfileSectionInfo__label {
-  color: #777777;
-  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 13px;
   font-family: 'Roboto', sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.75px;
   text-transform: uppercase;
   padding: 0px 0px 0px 20px;
 }
+
+
+.ProfileSectionInfo__label .InlineInput {
+  height: 32px;
+  opacity: 1.0;
+  transition: height 0.25s ease-in-out 0s,
+    opacity 0.25s ease-in-out 0s;
+}
+.ProfileInformation[data-editing="false"] .ProfileSectionInfo__label .InlineInput[data-empty="true"] {
+  height: 0px;
+  opacity: 0;
+}
+.ProfileInformation[data-editing="false"] .ProfileSectionInfo__label .InlineInput[data-empty="false"] {
+  height: 22px;
+}
+.ProfileSectionInfo__label input.InlineInput__input,
+.ProfileSectionInfo__label .InlineInput__testInput {
+  color: #2196f3;
+  font-size: 13px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.ProfileInformation[data-editing="false"] .ProfileSectionInfo__label input.InlineInput__input:not([value=""]) {
+  padding: 0px 0px 0px 0px;
+}
+.ProfileInformation[data-editing="true"] .ProfileSectionInfo__label input.InlineInput__input {
+  padding: 5px 10px 5px 10px;
+}
+.ProfileInformation[data-editing="true"] .ProfileSectionInfo__label input.InlineInput__input:focus {
+  color: #000000;
+}
+
+
+
+
 .ProfileSectionInfo__content {
   padding: 5px 0px;
 }
@@ -156,10 +186,28 @@
 .ProfileSectionInfo__row > span.comma {
   position: relative;
   width: 0px;
+  transition: margin 0.25s ease-in-out 0s,
+    opacity 0.25s ease-in-out 0s;
+}
+.ProfileInformation[data-editing="true"] .ProfileSectionInfo__row > span.comma {
   margin: 0px 10px 0px -10px;
+  opacity: 0.75;
+}
+.ProfileInformation[data-editing="false"] .ProfileSectionInfo__row > span.comma {
+  margin: 0px 5px 0px -6px;
   opacity: 0.5;
 }
+
 .ProfileSectionInfo__row > span.hyphen {
-  margin: 0px -2.5px;
+  position: relative;
+  width: 0px;
+  margin: 0px 2px 0px -2px;
+  transition: opacity 0.25s ease-in-out 0s;
+}
+
+.ProfileInformation[data-editing="true"] .ProfileSectionInfo__row > span.hyphen {
+  opacity: 0.75;
+}
+.ProfileInformation[data-editing="false"] .ProfileSectionInfo__row > span.hyphen {
   opacity: 0.5;
 }

@@ -5,6 +5,7 @@ import './ProfileInformation.css';
 import ProfileAddress from './components/ProfileAddress/ProfileAddress';
 import ProfilePhone from './components/ProfilePhone/ProfilePhone';
 import ProfileEmail from './components/ProfileEmail/ProfileEmail';
+import ProfileName from './components/ProfileName/ProfileName';
 
 class ProfileInformation extends Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class ProfileInformation extends Component {
     } = this.state;
 
     return (
-      <div className="ProfileInformation unselectable">
+      <div className="ProfileInformation unselectable" data-editing={isEditing}>
         <div
           className="ProfileInformation__toggle-button"
           data-information-visible={isInformationVisible}
@@ -61,10 +62,14 @@ class ProfileInformation extends Component {
           <div className="text">See Details</div>
         </div>
         <div className="ProfileInformationSections" data-visible={isInformationVisible}>
-          <div className="ProfileInformation__edit-mode" data-editable={isEditing}>
-            <div className="text">Editing Mode</div>
+          <div className="ProfileInformation__title" data-editing={isEditing}>
+            <div className="text" data-type="default">Profile information</div>
+            <div className="text" data-type="editing">Edit Profile</div>
           </div>
-          <div className="ProfileInformation__title">Profile information</div>
+          <div className="ProfileSection">
+            <div className="ProfileSection__title">Name</div>
+            <ProfileName name={profile.name} />
+          </div>
           <div className="ProfileSection">
             <div className="ProfileSection__title">Address</div>
             {
