@@ -7,6 +7,7 @@ class ProfileEmail extends Component {
     super(props);
     this.state = {
       email: props.email,
+      isReadOnly: false,
     };
   }
 
@@ -19,8 +20,17 @@ class ProfileEmail extends Component {
     });
   }
 
+  componentWillReceiveProps(props) {
+    this.setState({
+      isReadOnly: !props.profileInfo.isEditing,
+    });
+  }
+
   render() {
-    const { email } = this.state;
+    const {
+      email,
+      isReadOnly,
+    } = this.state;
 
     return (
       <div className="ProfileSectionInfo">
@@ -29,9 +39,10 @@ class ProfileEmail extends Component {
           <div className="ProfileSectionInfo__row">
             <InlineInput
               form="ProfileInputForm"
-              name="emailAddress"
-              placeholder="user@domain.com"
+              name={`emailAddress_${email.type}`}
+              placeholder="user@example.com"
               value={email.emailAddress}
+              isReadOnly={isReadOnly}
             />
           </div>
         </div>
@@ -42,7 +53,9 @@ class ProfileEmail extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return state;
+  return {
+    profileInfo: state.profileInfo,
+  };
 };
 
 const mapDispatchToProps = {
