@@ -21,17 +21,17 @@ input.InlineInput__input {
   outline: 0px;
   padding: 5px 10px 5px 10px;
   background-color: transparent;
-  transition: padding 0.25s ease-in-out 0s;
+  transition: color 0.25s ease-in-out 0s,
+    padding 0.25s ease-in-out 0s;
 }
 input.InlineInput__input,
 .InlineInput__testInput {
   color: #000;
   font-size: 17px;
   font-family: 'Roboto', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0.75px;
   line-height: 22px;
-  text-shadow: 0px 0px 0.01px rgba(0, 0, 0, 0.75);
 }
 input.InlineInput__input[value=""] {
   opacity: 0.75;
@@ -42,7 +42,7 @@ input.InlineInput__input:not([readonly]):focus {
   background-color: rgba(0, 0, 0, 0.075);
 }
 input.InlineInput__input[readonly] {
-  padding: 2.5px 10px 2.5px 10px;
+  padding: 2.5px 6px 2.5px 6px;
 }
 
 .InlineInput__testInput {
